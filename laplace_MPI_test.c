@@ -66,7 +66,7 @@ int main(int argc, char** argv)
     double t1 = MPI_Wtime();
     
     // INITIALIZE VARIABLES
-    int n = 12, m = 12; //4096
+    int n = 256, m = 256; //4096
     const float pi  = 2.0f * asinf(1.0f);
     const float tol = 3.0e-3f;
 
@@ -103,12 +103,26 @@ int main(int argc, char** argv)
     MPI_Scatter(A, n*m/size, MPI_FLOAT, A, n*m/size, MPI_FLOAT, 0, MPI_COMM_WORLD);
     
     // MAIN LOOP: iterate until error <= tol a maximum of iter_max iterations
-    while ( error > tol && iter < iter_max ) {
+    while (error > tol && iter < iter_max) { 
         // Send previous and posterior
-        if (rank > 0) {MPI_Send(&A[0], m, MPI_FLOAT, rank-1, 0, MPI_COMM_WORLD);}
-        if (rank != (size-1)){MPI_Send(&A[(n-1)*m], m, MPI_FLOAT, rank+1, 1, MPI_COMM_WORLD);}
-        if (rank != (size-1)){MPI_Recv(posterior, m, MPI_FLOAT, rank+1, 0, MPI_COMM_WORLD, &s);}
-        if (rank > 0) {MPI_Recv(previous, m, MPI_FLOAT, rank-1, 1, MPI_COMM_WORLD, &s);}
+        if (rank > 0) {
+        MPI_Send(&A[0], m, MPI_FLOAT, rank - 1, 0, MPI_COMM_WORLD);
+        }
+        if (rank < size - 1) {
+            MPI_Send(&A[(n - 1)*m], m, MPI_FLOAT, rank + 1, 1, MPI_COMM_WORLD);
+        }
+        if (rank < size - 1) {
+            MPI_Recv(posterior, m, MPI_FLOAT, rank + 1, 0, MPI_COMM_WORLD, &s);
+        }
+        if (rank > 0) {
+            MPI_Recv(previous, m, MPI_FLOAT, rank - 1, 1, MPI_COMM_WORLD, &s);
+        }
+
+        if (iter == 20) {
+        // Example printout for verification
+        printf("Process: %d, Iteration: %d, Posterior sent: %d, Previous sent: %d\n", rank, iter, A[0], A[(n-1)*m]);
+        printf("Process: %d, Iteration: %d, Posterior r: %d, Previous r: %d\n", rank, iter, posterior[0], previous[0]);
+        }
         
         // Compute new values using main matrix and writing into auxiliary matrix
         laplace_step (A, Anew, n/size, m, previous, posterior, rank, size);
@@ -125,15 +139,21 @@ int main(int argc, char** argv)
         if (iter % (iter_max/10) == 0)
             printf("Process: %d, Iteration: %d, Error: %0.6f\n", rank, iter, error);
     } 
-
-    printf("Calculation done!\n");   
-    free(A);
-    free(Anew);     
-
-    if (rank == 0){        
+    
+    
+    printf("Calculation done!\n");    
+    int result;
+    for (int i = 0; i < (n*m)/size; i++)
+    {
+        result+=A[i];
+    }
+    printf("Result: %d\n",result); 
+    if (rank == 0){               
         double t2 = MPI_Wtime();        
         printf("\nEXECUTION TIME: %fs\n", t2-t1);
-    }    
+    }
+    free(A);
+    free(Anew);
     MPI_Finalize();
     return 0;
 }
