@@ -101,9 +101,12 @@ int main(int argc, char** argv)
     // if number of iterations is multiple of 10 then print error on the screen
     iter++;
     if (iter % (iter_max/10) == 0)
-       printf("%5d, %0.6f\n", iter, error);
-  } // while
+       printf("%5d, %0.6f\n", rank, iter, error);
+  } 
 
+  printf("Calculation done!")
   free(A);
   free(Anew);
+  MPI_Finalize();
+  return 0;
 }
