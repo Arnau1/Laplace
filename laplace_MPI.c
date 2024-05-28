@@ -102,10 +102,10 @@ int main(int argc, char** argv)
 
     MPI_Scatter(A, n*m/size, MPI_FLOAT, A, n*m/size, MPI_FLOAT, 0, MPI_COMM_WORLD);
     
-    // // Send previous and posterior
-    // if (rank > 0 && rank < (size-1)){
-    //     MPI_Send(A[0], int count,MPI_Datatype datatype,int dest,int tag,MPI_Comm comm)
-    // }
+    // Send <previous and posterior
+    if (rank > 0 && rank < (size-1)){
+        MPI_Send(A[], int count,MPI_Datatype datatype,int dest,int tag,MPI_Comm comm)
+    }
 
     
     // MAIN LOOP: iterate until error <= tol a maximum of iter_max iterations
