@@ -14,8 +14,8 @@ void laplace_step (float *in, float *out, int n, int m, float *previous, float *
     int i, j;
     if (rank != 0) 
     {
-      for (k=1; k < m-1; k++)
-        out[k] = stencil(in[k+1], in[k-1], previous[k], in[m+k]);
+        for (k=1; k < m-1; k++)
+            out[k] = stencil(in[k+1], in[k-1], previous[k], in[m+k]);
     }
 
     for ( i=1; i < n-1; i++ )
@@ -25,7 +25,7 @@ void laplace_step (float *in, float *out, int n, int m, float *previous, float *
     if (rank != (size-1))
     {
       for(l=1; l < m-1; l++)
-        out[l] = stencil(in[l+1], in[l-1], in[(n-2)*m+l], posterior[l])
+            out[l] = stencil(in[l+1], in[l-1], in[(n-2)*m+l], posterior[l])
     }
 
 }
@@ -102,23 +102,27 @@ int main(int argc, char** argv)
 
     MPI_Scatter(A, n*m/size, MPI_FLOAT, A, n*m/size, MPI_FLOAT, 0, MPI_COMM_WORLD);
     
-    // Send <previous and posterior
-    if (rank > 0 && rank < (size-1)){
-        MPI_Send(A[], int count,MPI_Datatype datatype,int dest,int tag,MPI_Comm comm)
-    }
-
-    
     // MAIN LOOP: iterate until error <= tol a maximum of iter_max iterations
     while ( error > tol && iter < iter_max ) {
-    // Compute new values using main matrix and writing into auxiliary matrix
-    laplace_step (A, Anew, n/size, m, previous, posterior, rank);
+        // Send previous and posterior
+        if (rank > 0) {
+            MPI_Send(&A[0], m, MPI_FLOAT, rank-1, 0, MPI_COMM_WORLD);
+            MPI_IRecv(previous, m, MPI_FLOAT, rank-1, 1, MPI_COMM_WORDL, &s);
+        }
+        if (rank != (size-1)){
+            MPI_Send(&A[(n-1)*m], m, MPI_FLOAT, rank+1, 1, MPI_COMM_WORLD);
+            MPI_IRecv(posterior, m, MPI_FLOAT, rank+1, 0, MPI_COMM_WORL, &s);
+        }
 
-    // Compute error = maximum of the square root of the absolute differences
-    error = 0.0f;
-    error = laplace_error (A, Anew, n/size, m);
+        // Compute new values using main matrix and writing into auxiliary matrix
+        laplace_step (A, Anew, n/size, m, previous, posterior, rank);
 
-    // Copy from auxiliary matrix to main matrix
-    laplace_copy (Anew, A, n/size, m);
+        // Compute error = maximum of the square root of the absolute differences
+        error = 0.0f;
+        error = laplace_error (A, Anew, n/size, m);
+
+        // Copy from auxiliary matrix to main matrix
+        laplace_copy (Anew, A, n/size, m);
 
         // if number of iterations is multiple of 10 then print error on the screen
         iter++;
