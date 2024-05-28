@@ -9,12 +9,25 @@ float stencil ( float v1, float v2, float v3, float v4 )
     return (v1 + v2 + v3 + v4) / 4;
 }
 
-void laplace_step ( float *in, float *out, int n, int m)
+void laplace_step (float *in, float *out, int n, int m, float *previous, float *posterior, int rank)
 {
     int i, j;
+    if (rank != 0) 
+    {
+      for (k=1; k < m-1; k++)
+        out[k] = stencil(in[k+1], in[k-1], previous[k], in[m+k]);
+    }
+
     for ( i=1; i < n-1; i++ )
         for ( j=1; j < m-1; j++ )
             out[i*m+j]= stencil(in[i*m+j+1], in[i*m+j-1], in[(i-1)*m+j], in[(i+1)*m+j]);
+    
+    if (rank != (size-1))
+    {
+      for(l=1; l < m-1; l++)
+        out[l] = stencil(in[l+1], in[l-1], in[+l], posterior[l])
+    }
+
 }
 
 float laplace_error ( float *old, float *new, int n, int m )
@@ -91,7 +104,7 @@ int main(int argc, char** argv)
   // MAIN LOOP: iterate until error <= tol a maximum of iter_max iterations
   while ( error > tol && iter < iter_max ) {
     // Compute new values using main matrix and writing into auxiliary matrix
-    laplace_step (A, Anew, n/size, m, previous, posterior);
+    laplace_step (A, Anew, n/size, m, previous, posterior, rank);
 
     // Compute error = maximum of the square root of the absolute differences
     error = 0.0f;
