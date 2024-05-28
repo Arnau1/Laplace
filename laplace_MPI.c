@@ -25,7 +25,7 @@ void laplace_step (float *in, float *out, int n, int m, float *previous, float *
     if (rank != (size-1))
     {
       for(l=1; l < m-1; l++)
-        out[l] = stencil(in[l+1], in[l-1], in[+l], posterior[l])
+        out[l] = stencil(in[l+1], in[l-1], in[(n-2)*m+l], posterior[l])
     }
 
 }
