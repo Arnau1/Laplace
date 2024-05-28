@@ -66,7 +66,7 @@ int main(int argc, char** argv)
     double t1 = MPI_Wtime();
     
     // INITIALIZE VARIABLES
-    int n = 4096, m = 4096;
+    int n = 12, m = 12; //4096
     const float pi  = 2.0f * asinf(1.0f);
     const float tol = 3.0e-3f;
 
@@ -87,7 +87,7 @@ int main(int argc, char** argv)
 
     // INITIALIZE MPI (size = nproc)
     int size, rank, task;		
-    MPI_Status s;
+    MPI_Status s;    
     MPI_Request request;
     MPI_Init(&argc, &argv);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
@@ -125,14 +125,20 @@ int main(int argc, char** argv)
         if (iter % (iter_max/10) == 0)
             printf("Process: %d, Iteration: %d, Error: %0.6f\n", rank, iter, error);
     } 
-
-    printf("Calculation done!\n");
-    free(A);
-    free(Anew);
+    
+    printf("Calculation done!\n");    
     if (rank == 0){
+        int result;
+        for (int i = 0; i < n*m; i++)
+        {
+            result+=A[i];
+        }
         double t2 = MPI_Wtime();
+        printf("Result: %d",result);
         printf("\nEXECUTION TIME: %fs\n", t2-t1);
     }
+    free(A);
+    free(Anew);
     MPI_Finalize();
     return 0;
 }

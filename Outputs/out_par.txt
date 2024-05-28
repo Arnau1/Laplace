@@ -1,0 +1,10 @@
+Jacobi relaxation Calculation: 12 rows x 12 columns mesh, maximum of 100 iterations
+Process: 0, Iteration: 10, Error: 0.003591
+Process: 1, Iteration: 10, Error: 0.006453
+Process: 2, Iteration: 10, Error: 0.006453
+Process: 3, Iteration: 10, Error: 0.003591
+Calculation done!
+mpirun: Forwarding signal 18 to job
+slurmstepd: error: *** JOB 237866 ON clus01 CANCELLED AT 2024-05-28T21:13:13 ***
+mpirun: Forwarding signal 18 to job
+slurmstepd: error: *** JOB 237870 ON clus01 CANCELLED AT 2024-05-28T21:13:17 ***
