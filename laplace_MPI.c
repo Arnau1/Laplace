@@ -67,7 +67,7 @@ int main(int argc, char** argv)
   A    = (float*) malloc( n*m*sizeof(float) );
   Anew = (float*) malloc( n*m*sizeof(float) );
 
-  // set boundary conditions
+  // INITIALIZE MATRICES: Set boundary conditions
   laplace_init (A, n, m);
 
   printf("Jacobi relaxation Calculation: %d rows x %d columns mesh,"
@@ -75,7 +75,7 @@ int main(int argc, char** argv)
          n, m, iter_max );
 
 
-  // Main loop: iterate until error <= tol a maximum of iter_max iterations
+  // MAIN LOOP: iterate until error <= tol a maximum of iter_max iterations
   while ( error > tol && iter < iter_max ) {
     // Compute new values using main matrix and writing into auxiliary matrix
     laplace_step (A, Anew, n, m);
