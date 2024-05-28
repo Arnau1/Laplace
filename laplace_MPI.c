@@ -100,11 +100,11 @@ int main(int argc, char** argv)
         // Copy from auxiliary matrix to main matrix
         laplace_copy (Anew, A, n, m);
 
-        // if number of iterations is multiple of 10 then print error on the screen
-        iter++;
-        if (iter % (iter_max/10) == 0)
-            printf("%5d, %0.6f\n", rank, iter, error);
-    } 
+    // if number of iterations is multiple of 10 then print error on the screen
+    iter++;
+    if (iter % (iter_max/10) == 0)
+       printf("Process %d, iteration %d, error %0.6f\n", rank, iter, error);
+  } 
 
     printf("Calculation done!")
     free(A);
