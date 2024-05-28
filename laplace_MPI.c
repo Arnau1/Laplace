@@ -91,11 +91,11 @@ int main(int argc, char** argv)
     // MAIN LOOP: iterate until error <= tol a maximum of iter_max iterations
     while ( error > tol && iter < iter_max ) {
     // Compute new values using main matrix and writing into auxiliary matrix
-    laplace_step (A, Anew, n/size, m);
+    laplace_step (A, Anew, n/size, m, previous, posterior);
 
     // Compute error = maximum of the square root of the absolute differences
     error = 0.0f;
-    error = laplace_error (A, Anew, n/size, m, previous, posterior);
+    error = laplace_error (A, Anew, n/size, m);
 
     // Copy from auxiliary matrix to main matrix
     laplace_copy (Anew, A, n/size, m);
