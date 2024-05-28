@@ -1,1 +1,45 @@
+Jacobi relaxation Calculation: 4096 rows x 4096 columns mesh, maximum of 100 iterations
+Jacobi relaxation Calculation: 4096 rows x 4096 columns mesh, maximum of 100 iterations
+Jacobi relaxation Calculation: 4096 rows x 4096 columns mesh, maximum of 100 iterations
+Jacobi relaxation Calculation: 4096 rows x 4096 columns mesh, maximum of 100 iterations
+Process 3, iteration    10, error 0.155006
+Process 0, iteration    10, error 0.155006
+Process 2, iteration    10, error 0.155006
+Process 1, iteration    10, error 0.155006
+Process 3, iteration    20, error 0.110024
+Process 0, iteration    20, error 0.110024
+Process 1, iteration    20, error 0.110024
+Process 2, iteration    20, error 0.110024
+Process 3, iteration    30, error 0.089901
+Process 0, iteration    30, error 0.089901
+Process 1, iteration    30, error 0.089901
+Process 2, iteration    30, error 0.089901
+Process 3, iteration    40, error 0.077374
+Process 0, iteration    40, error 0.077374
+Process 1, iteration    40, error 0.077374
+Process 2, iteration    40, error 0.077374
+Process 3, iteration    50, error 0.069623
+Process 0, iteration    50, error 0.069623
+Process 1, iteration    50, error 0.069623
+Process 2, iteration    50, error 0.069623
+Process 0, iteration    60, error 0.063285
+Process 3, iteration    60, error 0.063285
+Process 1, iteration    60, error 0.063285
+Process 2, iteration    60, error 0.063285
+Process 0, iteration    70, error 0.058825
+Process 3, iteration    70, error 0.058825
+Process 1, iteration    70, error 0.058825
+Process 2, iteration    70, error 0.058825
+Process 0, iteration    80, error 0.054946
+Process 3, iteration    80, error 0.054946
+Process 1, iteration    80, error 0.054946
+Process 2, iteration    80, error 0.054946
+Process 0, iteration    90, error 0.051831
+Process 3, iteration    90, error 0.051831
+Process 1, iteration    90, error 0.051831
+Process 2, iteration    90, error 0.051831
+Process 0, iteration   100, error 0.049208
+Process 3, iteration   100, error 0.049208
+Process 1, iteration   100, error 0.049208
+Process 2, iteration   100, error 0.049208
 Calculation done!Calculation done!Calculation done!Calculation done!
