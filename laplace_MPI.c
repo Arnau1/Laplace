@@ -75,15 +75,15 @@ int main(int argc, char** argv)
   MPI_Comm_size(MPI_COMM_WORLD, &size);
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);	
 
-  if (rank==0)
-  {
-    laplace_init (A, n, m);
+  // if (rank==0)
+  // {
+  //   laplace_init (A, n, m);
 
-    printf("Jacobi relaxation Calculation: %d rows x %d columns mesh,"
-         " maximum of %d iterations\n",
-         n, m, iter_max );
-    MPI_Scatter(A, N*N/size, MPI_FLOAT, A, N*N/size, MPI_FLOAT, 0, MPI_COMM_WORLD);
-  }
+  //   printf("Jacobi relaxation Calculation: %d rows x %d columns mesh,"
+  //        " maximum of %d iterations\n",
+  //        n, m, iter_max );
+  //   MPI_Scatter(A, N*N/size, MPI_FLOAT, A, N*N/size, MPI_FLOAT, 0, MPI_COMM_WORLD);
+  // }
   
 
   // MAIN LOOP: iterate until error <= tol a maximum of iter_max iterations
@@ -101,10 +101,10 @@ int main(int argc, char** argv)
     // if number of iterations is multiple of 10 then print error on the screen
     iter++;
     if (iter % (iter_max/10) == 0)
-       printf("%5d, %0.6f\n", rank, iter, error);
+       printf("Process %d, iteration %5d, error %0.6f\n", rank, iter, error);
   } 
 
-  printf("Calculation done!")
+  printf("Calculation done!");
   free(A);
   free(Anew);
   MPI_Finalize();
