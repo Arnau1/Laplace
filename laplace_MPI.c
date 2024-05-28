@@ -105,15 +105,11 @@ int main(int argc, char** argv)
     // MAIN LOOP: iterate until error <= tol a maximum of iter_max iterations
     while ( error > tol && iter < iter_max ) {
         // Send previous and posterior
-        if (rank > 0) {
-            MPI_Send(&A[0], m, MPI_FLOAT, rank-1, 0, MPI_COMM_WORLD);
-            MPI_IRecv(previous, m, MPI_FLOAT, rank-1, 1, MPI_COMM_WORDL, &s);
-        }
-        if (rank != (size-1)){
-            MPI_Send(&A[(n-1)*m], m, MPI_FLOAT, rank+1, 1, MPI_COMM_WORLD);
-            MPI_IRecv(posterior, m, MPI_FLOAT, rank+1, 0, MPI_COMM_WORL, &s);
-        }
-
+        if (rank > 0) {MPI_Send(&A[0], m, MPI_FLOAT, rank-1, 0, MPI_COMM_WORLD);}
+        if (rank != (size-1)){MPI_Send(&A[(n-1)*m], m, MPI_FLOAT, rank+1, 1, MPI_COMM_WORLD);}
+        if (rank != (size-1)){MPI_Recv(posterior, m, MPI_FLOAT, rank+1, 0, MPI_COMM_WORL, &s);}
+        if (rank > 0) {MPI_Recv(previous, m, MPI_FLOAT, rank-1, 1, MPI_COMM_WORDL, &s);}
+        
         // Compute new values using main matrix and writing into auxiliary matrix
         laplace_step (A, Anew, n/size, m, previous, posterior, rank);
 
