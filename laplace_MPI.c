@@ -48,7 +48,7 @@ void laplace_init ( float *in, int n, int m )
 }
 
 int main(int argc, char** argv)
-{
+{  
   // INITIALIZE VARIABLES
   int n = 4096, m = 4096;
   const float pi  = 2.0f * asinf(1.0f);
@@ -67,13 +67,24 @@ int main(int argc, char** argv)
   A    = (float*) malloc( n*m*sizeof(float) );
   Anew = (float*) malloc( n*m*sizeof(float) );
 
-  // INITIALIZE MATRICES: Set boundary conditions
-  laplace_init (A, n, m);
+  // INITIALIZE MPI
+  int size, rank;		
+  MPI_Status s;
+	MPI_Request request;
+  MPI_Init(&argc, &argv);
+  MPI_Comm_size(MPI_COMM_WORLD, &size);
+  MPI_Comm_rank(MPI_COMM_WORLD, &rank);	
 
-  printf("Jacobi relaxation Calculation: %d rows x %d columns mesh,"
+  if (rank==0)
+  {
+    laplace_init (A, n, m);
+
+    printf("Jacobi relaxation Calculation: %d rows x %d columns mesh,"
          " maximum of %d iterations\n",
          n, m, iter_max );
-
+    MPI_Scatter(A, N*N/size, MPI_FLOAT, A, N*N/size, MPI_FLOAT, 0, MPI_COMM_WORLD);
+  }
+  
 
   // MAIN LOOP: iterate until error <= tol a maximum of iter_max iterations
   while ( error > tol && iter < iter_max ) {
