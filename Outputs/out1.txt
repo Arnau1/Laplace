@@ -1,8 +1,8 @@
 laplace_MPI.c: En la función ‘laplace_step’:
-laplace_MPI.c:17:12: error: ‘k’ no se declaró aquí (primer uso en esta función)
-       for (k=1; k < m-1; k++)
-            ^
-laplace_MPI.c:17:12: nota: cada identificador sin declarar se reporta sólo una vez para cada función en el que aparece
+laplace_MPI.c:17:14: error: ‘k’ no se declaró aquí (primer uso en esta función)
+         for (k=1; k < m-1; k++)
+              ^
+laplace_MPI.c:17:14: nota: cada identificador sin declarar se reporta sólo una vez para cada función en el que aparece
 laplace_MPI.c:25:18: error: ‘size’ no se declaró aquí (primer uso en esta función); ¿quiso decir ‘sinl’?
      if (rank != (size-1))
                   ^~~~
@@ -10,14 +10,26 @@ laplace_MPI.c:25:18: error: ‘size’ no se declaró aquí (primer uso en esta 
 laplace_MPI.c:27:11: error: ‘l’ no se declaró aquí (primer uso en esta función)
        for(l=1; l < m-1; l++)
            ^
-laplace_MPI.c:28:65: error: expected ‘;’ before ‘}’ token
-         out[l] = stencil(in[l+1], in[l-1], in[+l], posterior[l])
-                                                                 ^
-                                                                 ;
+laplace_MPI.c:28:76: error: expected ‘;’ before ‘}’ token
+             out[l] = stencil(in[l+1], in[l-1], in[(n-2)*m+l], posterior[l])
+                                                                            ^
+                                                                            ;
      }
-     ~                                                            
+     ~                                                                       
 laplace_MPI.c: En la función ‘main’:
-laplace_MPI.c:134:45: error: expected ‘;’ before ‘}’ token
+laplace_MPI.c:110:13: aviso: declaración implícita de la función ‘MPI_IRecv’; ¿quiso decir ‘MPI_Recv’? [-Wimplicit-function-declaration]
+             MPI_IRecv(previous, m, MPI_FLOAT, rank-1, 1, MPI_COMM_WORDL, &s);
+             ^~~~~~~~~
+             MPI_Recv
+laplace_MPI.c:110:58: error: ‘MPI_COMM_WORDL’ no se declaró aquí (primer uso en esta función); ¿quiso decir ‘MPI_COMM_WORLD’?
+             MPI_IRecv(previous, m, MPI_FLOAT, rank-1, 1, MPI_COMM_WORDL, &s);
+                                                          ^~~~~~~~~~~~~~
+                                                          MPI_COMM_WORLD
+laplace_MPI.c:114:59: error: ‘MPI_COMM_WORL’ no se declaró aquí (primer uso en esta función); ¿quiso decir ‘MPI_COMM_WORLD’?
+             MPI_IRecv(posterior, m, MPI_FLOAT, rank+1, 0, MPI_COMM_WORL, &s);
+                                                           ^~~~~~~~~~~~~
+                                                           MPI_COMM_WORLD
+laplace_MPI.c:138:45: error: expected ‘;’ before ‘}’ token
          printf("Execution time: %fs", t2-t1)
                                              ^
                                              ;
@@ -32,7 +44,7 @@ NOTE: A common cause for this error is misspelling a mpirun command
       line parameter option (remember that mpirun interprets the first
       unrecognized command line token as the executable).
 
-Node:       clus05
+Node:       clus01
 Executable: executable
 --------------------------------------------------------------------------
 4 total processes failed to start
