@@ -11,7 +11,7 @@ float stencil ( float v1, float v2, float v3, float v4 )
 
 void laplace_step ( float *in, float *out, int n, int m)
 {
-  int i, j;
+  int i, j;  
   for ( i=1; i < n-1; i++ )
     for ( j=1; j < m-1; j++ )
       out[i*m+j]= stencil(in[i*m+j+1], in[i*m+j-1], in[(i-1)*m+j], in[(i+1)*m+j]);
@@ -57,7 +57,7 @@ int main(int argc, char** argv)
   float error= 1.0f;;
 
   int i, j, iter_max=100, iter=0;
-  float *A, *Anew;
+  float *A, *Anew, *previous, *posterior;
 
   // get runtime arguments: n, m and iter_max
   if (argc>1) {  n        = atoi(argv[1]); }
@@ -66,9 +66,11 @@ int main(int argc, char** argv)
 
   A    = (float*) malloc( n*m*sizeof(float) );
   Anew = (float*) malloc( n*m*sizeof(float) );
+  previous = (float*) malloc(m*sizeof(float));
+  posterior = (float*) malloc(m*sizeof(float));
 
   // INITIALIZE MPI
-  int size, rank;		
+  int size, rank, task;		
   MPI_Status s;
 	MPI_Request request;
   MPI_Init(&argc, &argv);
@@ -81,20 +83,20 @@ int main(int argc, char** argv)
     printf("Jacobi relaxation Calculation: %d rows x %d columns mesh,"
           " maximum of %d iterations\n", n, m, iter_max );    
   }
-  
+
   MPI_Scatter(A, N*N/size, MPI_FLOAT, A, N*N/size, MPI_FLOAT, 0, MPI_COMM_WORLD);
-  
+    
   // MAIN LOOP: iterate until error <= tol a maximum of iter_max iterations
   while ( error > tol && iter < iter_max ) {
     // Compute new values using main matrix and writing into auxiliary matrix
-    laplace_step (A, Anew, n, m);
+    laplace_step (A, Anew, n/size, m);
 
     // Compute error = maximum of the square root of the absolute differences
     error = 0.0f;
-    error = laplace_error (A, Anew, n, m);
+    error = laplace_error (A, Anew, n/size, m, previous, posterior);
 
     // Copy from auxiliary matrix to main matrix
-    laplace_copy (Anew, A, n, m);
+    laplace_copy (Anew, A, n/size, m);
 
     // if number of iterations is multiple of 10 then print error on the screen
     iter++;
