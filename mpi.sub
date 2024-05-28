@@ -9,9 +9,9 @@
 
 module load openmpi/4.1.1 
 
-mpicc $1.c -o $1 -lmpi -lm
+mpicc $1.c -o executable -lmpi -lm
 
 #mpirun --mca btl_tcp_if_include eth0,eth1 --mca btl_openib_allow_ib 0 $1 
 mpirun $1 
 
-rm $1
+rm executable
