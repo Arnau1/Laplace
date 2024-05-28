@@ -1,39 +1,42 @@
-laplace_MPI.c: En la función ‘laplace_step’:
-laplace_MPI.c:17:12: error: ‘k’ no se declaró aquí (primer uso en esta función)
-       for (k=1; k < m-1; k++)
-            ^
-laplace_MPI.c:17:12: nota: cada identificador sin declarar se reporta sólo una vez para cada función en el que aparece
-laplace_MPI.c:25:18: error: ‘size’ no se declaró aquí (primer uso en esta función); ¿quiso decir ‘sinl’?
-     if (rank != (size-1))
-                  ^~~~
-                  sinl
-laplace_MPI.c:27:11: error: ‘l’ no se declaró aquí (primer uso en esta función)
-       for(l=1; l < m-1; l++)
-           ^
-laplace_MPI.c:28:65: error: expected ‘;’ before ‘}’ token
-         out[l] = stencil(in[l+1], in[l-1], in[+l], posterior[l])
-                                                                 ^
-                                                                 ;
-     }
-     ~                                                            
-laplace_MPI.c: En la función ‘main’:
-laplace_MPI.c:134:45: error: expected ‘;’ before ‘}’ token
-         printf("Execution time: %fs", t2-t1)
-                                             ^
-                                             ;
-     }
-     ~                                        
---------------------------------------------------------------------------
-mpirun was unable to find the specified executable file, and therefore
-did not launch the job.  This error was first reported for process
-rank 0; it may have occurred for other processes as well.
-
-NOTE: A common cause for this error is misspelling a mpirun command
-      line parameter option (remember that mpirun interprets the first
-      unrecognized command line token as the executable).
-
-Node:       clus05
-Executable: executable
---------------------------------------------------------------------------
-4 total processes failed to start
-rm: no se puede borrar 'executable': No existe el fichero o el directorio
+Jacobi relaxation Calculation: 4096 rows x 4096 columns mesh, maximum of 100 iterations
+    3, 0.129908
+    2, 0.155004
+    0, 0.129908
+    1, 0.155004
+    2, 0.110020
+    3, 0.092085
+    1, 0.110020
+    0, 0.092085
+    3, 0.075174
+    2, 0.089897
+    0, 0.075174
+    1, 0.089897
+    3, 0.064646
+    2, 0.077369
+    1, 0.077369
+    0, 0.064646
+    3, 0.058131
+    2, 0.069618
+    0, 0.058131
+    1, 0.069618
+    3, 0.052805
+    2, 0.063279
+    1, 0.063279
+    0, 0.052805
+    1, 0.058818
+    3, 0.049057
+    2, 0.058818
+    0, 0.049057
+    1, 0.054939
+    0, 0.045794
+    3, 0.045794
+    2, 0.054939
+    3, 0.043178
+    0, 0.043178
+    1, 0.051824
+    2, 0.051824
+    0, 0.040976
+    3, 0.040976
+    2, 0.049200
+    1, 0.049200
+Calculation done!Calculation done!Execution time: 18.033424sCalculation done!Calculation done!

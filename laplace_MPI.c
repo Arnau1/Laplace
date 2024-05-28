@@ -9,9 +9,9 @@ float stencil ( float v1, float v2, float v3, float v4 )
     return (v1 + v2 + v3 + v4) / 4;
 }
 
-void laplace_step (float *in, float *out, int n, int m, float *previous, float *posterior, int rank)
+void laplace_step (float *in, float *out, int n, int m, float *previous, float *posterior, int rank, int size)
 {
-    int i, j;
+    int i, j, k, l;
     if (rank != 0) 
     {
         for (k=1; k < m-1; k++)
@@ -25,7 +25,7 @@ void laplace_step (float *in, float *out, int n, int m, float *previous, float *
     if (rank != (size-1))
     {
       for(l=1; l < m-1; l++)
-            out[l] = stencil(in[l+1], in[l-1], in[(n-2)*m+l], posterior[l])
+            out[l] = stencil(in[l+1], in[l-1], in[(n-2)*m+l], posterior[l]);
     }
 
 }
@@ -107,11 +107,11 @@ int main(int argc, char** argv)
         // Send previous and posterior
         if (rank > 0) {MPI_Send(&A[0], m, MPI_FLOAT, rank-1, 0, MPI_COMM_WORLD);}
         if (rank != (size-1)){MPI_Send(&A[(n-1)*m], m, MPI_FLOAT, rank+1, 1, MPI_COMM_WORLD);}
-        if (rank != (size-1)){MPI_Recv(posterior, m, MPI_FLOAT, rank+1, 0, MPI_COMM_WORL, &s);}
-        if (rank > 0) {MPI_Recv(previous, m, MPI_FLOAT, rank-1, 1, MPI_COMM_WORDL, &s);}
+        if (rank != (size-1)){MPI_Recv(posterior, m, MPI_FLOAT, rank+1, 0, MPI_COMM_WORLD, &s);}
+        if (rank > 0) {MPI_Recv(previous, m, MPI_FLOAT, rank-1, 1, MPI_COMM_WORLD, &s);}
         
         // Compute new values using main matrix and writing into auxiliary matrix
-        laplace_step (A, Anew, n/size, m, previous, posterior, rank);
+        laplace_step (A, Anew, n/size, m, previous, posterior, rank, size);
 
         // Compute error = maximum of the square root of the absolute differences
         error = 0.0f;
@@ -123,15 +123,15 @@ int main(int argc, char** argv)
         // if number of iterations is multiple of 10 then print error on the screen
         iter++;
         if (iter % (iter_max/10) == 0)
-            printf("%5d, %0.6f\n", rank, iter, error);
+            printf("Process: %d, Iteration: %d, Error: %0.6f\n", rank, iter, error);
     } 
 
-    printf("Calculation done!");
+    printf("Calculation done!\n");
     free(A);
     free(Anew);
     if (rank == 0){
         double t2 = MPI_Wtime();
-        printf("Execution time: %fs", t2-t1)
+        printf("\nEXECUTION TIME: %fs\n", t2-t1);
     }
     MPI_Finalize();
     return 0;
