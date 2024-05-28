@@ -62,8 +62,9 @@ void laplace_init ( float *in, int n, int m )
 
 int main(int argc, char** argv)
 {  
+    // Initial time
     double t1 = MPI_Wtime();
-
+    
     // INITIALIZE VARIABLES
     int n = 4096, m = 4096;
     const float pi  = 2.0f * asinf(1.0f);
@@ -84,7 +85,7 @@ int main(int argc, char** argv)
     previous = (float*) malloc(m*sizeof(float));
     posterior = (float*) malloc(m*sizeof(float));
 
-    // INITIALIZE MPI
+    // INITIALIZE MPI (size = nproc)
     int size, rank, task;		
     MPI_Status s;
     MPI_Request request;
@@ -99,7 +100,13 @@ int main(int argc, char** argv)
             " maximum of %d iterations\n", n, m, iter_max );    
     }
 
-    MPI_Scatter(A, N*N/size, MPI_FLOAT, A, N*N/size, MPI_FLOAT, 0, MPI_COMM_WORLD);
+    MPI_Scatter(A, n*m/size, MPI_FLOAT, A, n*m/size, MPI_FLOAT, 0, MPI_COMM_WORLD);
+    
+    // // Send previous and posterior
+    // if (rank > 0 && rank < (size-1)){
+    //     MPI_Send(A[0], int count,MPI_Datatype datatype,int dest,int tag,MPI_Comm comm)
+    // }
+
     
     // MAIN LOOP: iterate until error <= tol a maximum of iter_max iterations
     while ( error > tol && iter < iter_max ) {
@@ -119,7 +126,7 @@ int main(int argc, char** argv)
             printf("%5d, %0.6f\n", rank, iter, error);
     } 
 
-    printf("Calculation done!")
+    printf("Calculation done!");
     free(A);
     free(Anew);
     if (rank == 0){
