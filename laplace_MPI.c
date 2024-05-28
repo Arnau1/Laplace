@@ -58,38 +58,38 @@ int main(int argc, char** argv)
 
     float error= 1.0f;;
 
-  int i, j, iter_max=100, iter=0;
-  float *A, *Anew, *previous, *posterior;
+    int i, j, iter_max=100, iter=0;
+    float *A, *Anew, *previous, *posterior;
 
     // get runtime arguments: n, m and iter_max
     if (argc>1) {  n        = atoi(argv[1]); }
     if (argc>2) {  m        = atoi(argv[2]); }
     if (argc>3) {  iter_max = atoi(argv[3]); }
 
-  A    = (float*) malloc( n*m*sizeof(float) );
-  Anew = (float*) malloc( n*m*sizeof(float) );
-  previous = (float*) malloc(m*sizeof(float));
-  posterior = (float*) malloc(m*sizeof(float));
+    A    = (float*) malloc( n*m*sizeof(float) );
+    Anew = (float*) malloc( n*m*sizeof(float) );
+    previous = (float*) malloc(m*sizeof(float));
+    posterior = (float*) malloc(m*sizeof(float));
 
-  // INITIALIZE MPI
-  int size, rank, task;		
-  MPI_Status s;
-	MPI_Request request;
-  MPI_Init(&argc, &argv);
-  MPI_Comm_size(MPI_COMM_WORLD, &size);
-  MPI_Comm_rank(MPI_COMM_WORLD, &rank);	
+    // INITIALIZE MPI
+    int size, rank, task;		
+    MPI_Status s;
+        MPI_Request request;
+    MPI_Init(&argc, &argv);
+    MPI_Comm_size(MPI_COMM_WORLD, &size);
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);	
 
-  if (rank==0)
-  {
-    laplace_init (A, n, m);
-    printf("Jacobi relaxation Calculation: %d rows x %d columns mesh,"
-          " maximum of %d iterations\n", n, m, iter_max );    
-  }
+    if (rank==0)
+    {
+        laplace_init (A, n, m);
+        printf("Jacobi relaxation Calculation: %d rows x %d columns mesh,"
+            " maximum of %d iterations\n", n, m, iter_max );    
+    }
 
-  MPI_Scatter(A, N*N/size, MPI_FLOAT, A, N*N/size, MPI_FLOAT, 0, MPI_COMM_WORLD);
+    MPI_Scatter(A, N*N/size, MPI_FLOAT, A, N*N/size, MPI_FLOAT, 0, MPI_COMM_WORLD);
     
-  // MAIN LOOP: iterate until error <= tol a maximum of iter_max iterations
-  while ( error > tol && iter < iter_max ) {
+    // MAIN LOOP: iterate until error <= tol a maximum of iter_max iterations
+    while ( error > tol && iter < iter_max ) {
     // Compute new values using main matrix and writing into auxiliary matrix
     laplace_step (A, Anew, n/size, m);
 
