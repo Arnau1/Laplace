@@ -1,0 +1,37 @@
+laplace_MPI.c: En la función ‘main’:
+laplace_MPI.c:90:20: error: ‘N’ no se declaró aquí (primer uso en esta función)
+     MPI_Scatter(A, N*N/size, MPI_FLOAT, A, N*N/size, MPI_FLOAT, 0, MPI_COMM_WORLD);
+                    ^
+laplace_MPI.c:90:20: nota: cada identificador sin declarar se reporta sólo una vez para cada función en el que aparece
+laplace_MPI.c:101:5: error: demasiados argumentos para la función ‘laplace_step’
+     laplace_step (A, Anew, n/size, m, previous, posterior);
+     ^~~~~~~~~~~~
+laplace_MPI.c:12:6: nota: se declara aquí
+ void laplace_step ( float *in, float *out, int n, int m)
+      ^~~~~~~~~~~~
+laplace_MPI.c:116:32: error: expected ‘;’ before ‘free’
+     printf("Calculation done!")
+                                ^
+                                ;
+     free(A);
+     ~~~~                        
+laplace_MPI.c:121:45: error: expected ‘;’ before ‘}’ token
+         printf("Execution time: %fs", t2-t1)
+                                             ^
+                                             ;
+     }
+     ~                                        
+--------------------------------------------------------------------------
+mpirun was unable to find the specified executable file, and therefore
+did not launch the job.  This error was first reported for process
+rank 0; it may have occurred for other processes as well.
+
+NOTE: A common cause for this error is misspelling a mpirun command
+      line parameter option (remember that mpirun interprets the first
+      unrecognized command line token as the executable).
+
+Node:       clus04
+Executable: executable
+--------------------------------------------------------------------------
+4 total processes failed to start
+rm: no se puede borrar 'executable': No existe el fichero o el directorio

@@ -5,7 +5,7 @@
 #SBATCH -n 4 # number of cores/processes, must be at most number of nodes * 12 
 #SBATCH --distribution=cyclic
 #SBATCH --partition=nodo.q 
-#SBATCH --output=mpi.txt 
+#SBATCH --output=Outputs/out1.txt 
 
 module load openmpi/4.1.1 
 
