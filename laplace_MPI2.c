@@ -144,11 +144,11 @@ int main(int argc, char** argv)
         printf("%5d, %0.6f\n", iter, error);
     } // while
 
+    free(A); free(Anew); free(Aext); free(Anewext);
+    free(row0); free(rown); free(prev); free(post);
+
     if (rank == 0){
         double t2 = MPI_Wtime();
         print("Finished calculation! Time: %fs", t2-t1)
     }
-
-    free(A);
-    free(Anew);
 }
