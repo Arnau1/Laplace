@@ -75,14 +75,17 @@ int main(int argc, char** argv)
     MPI_Comm_size(MPI_COMM_WORLD, &nproc);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
-    // Number of rows per process
+    // Number of rows per process and of n distributed
     int split = n / nproc;
+    int extension;
+    if (rank == 0 || rank == nproc-1) {extension = 1;}
+    else {extension = 2;}
 
     // Declare arrays
     A    = (float*) malloc(n * m * sizeof(float) );
     Anew = (float*) malloc(n * m * sizeof(float) );
-    Aext = (float*) malloc(n * (split+2) * sizeof(float));
-    Anewext = (float*) malloc(n * (split+2) * sizeof(float));
+    Aext = (float*) malloc(n * (split+extension) * sizeof(float));
+    Anewext = (float*) malloc(n * (split+extension) * sizeof(float));
     row0 = (float*) malloc(m * sizeof(float));
     rown = (float*) malloc(m * sizeof(float));
     prev = (float*) malloc(m * sizeof(float));
@@ -91,7 +94,7 @@ int main(int argc, char** argv)
     // set boundary conditions
     if (rank == 0) {
         laplace_init (A, n, m);
-        printf("Jacobi relaxation Calculation: %d rows x %d columns mesh,"
+        printf("\nJacobi relaxation Calculation: %d rows x %d columns mesh,"
             " maximum of %d iterations\n",
             n, m, iter_max );
     }
@@ -104,28 +107,44 @@ int main(int argc, char** argv)
         // Send and recieve prev and post
         memcpy(row0, A, m*sizeof(float));
         memcpy(rown, A+(m*(split-1)), m*sizeof(float));
+        // If not 0
         if (rank > 0) {
             MPI_Send(row0, m, MPI_FLOAT, rank-1, 0, MPI_COMM_WORLD);
-        if (rank+1 < nproc) {MPI_Irecv(post, m, MPI_FLOAT, rank+1, 0, MPI_COMM_WORLD, &request);}            
-            }
+            if (rank+1 < nproc) {
+                MPI_Irecv(post, m, MPI_FLOAT, rank+1, 0, MPI_COMM_WORLD, &request);
+                }            
+        }
+        // if not last
         if (rank < (nproc-1)) {
             MPI_Send(rown, m, MPI_FLOAT, rank+1, 0, MPI_COMM_WORLD);
-        if (rank-1 > 0) {MPI_Irecv(prev, m, MPI_FLOAT, rank-1, 0, MPI_COMM_WORLD, &request);} 
+            if (rank-1 > 0) {
+                MPI_Irecv(prev, m, MPI_FLOAT, rank-1, 0, MPI_COMM_WORLD, &request);
+                } 
         }
+        MPI_Wait(&request, &s);
 
         // Extend A with prev and post
-        memcpy(Aext, prev, m*sizeof(float));
-        memcpy(Aext+m, A, split*m*sizeof(float));
-        memcpy(Aext+(split*m), post, m*sizeof(float));
+        if (rank == 0) {
+            memcpy(Aext, A, split*m*sizeof(float));
+            memcpy(Aext+(split*m), post, m*sizeof(float));
+        } else if (rank == nproc-1) {
+            memcpy(Aext, prev, m*sizeof(float));
+            memcpy(Aext+m, A, split*m*sizeof(float));
+        } else {
+            memcpy(Aext, prev, m*sizeof(float));
+            memcpy(Aext+m, A, split*m*sizeof(float));
+            memcpy(Aext+(split*m), post, m*sizeof(float));
+        }
 
         // Create Anewext as a copy of Aext
-        memcpy(Anewext, A, (split+2)*m*sizeof(float));
+        memcpy(Anewext, Aext, (split+extension)*m*sizeof(float));
 
         // Compute new values using main matrix and writing into auxiliary matrix (with Aext and Anewext)
-        laplace_step (Aext, Anewext, split+2, m);
+        laplace_step (Aext, Anewext, split+extension, m);
 
         // Create Anew by removing the extensions from Anewext
-        memcpy(Anew, Anewext+m, split*m*sizeof(float));
+        if (rank == 0) {memcpy(Anew, Anewext, split*m*sizeof(float));}
+        else           {memcpy(Anew, Anewext+m, split*m*sizeof(float));}
 
         // Gather Anew to 0
         MPI_Gather(Anew, split*m, MPI_FLOAT, Anew, split*m, MPI_FLOAT, 0, MPI_COMM_WORLD);
@@ -143,7 +162,8 @@ int main(int argc, char** argv)
             if (iter % (iter_max/10) == 0)
             printf("%5d, %0.6f\n", iter, error);
         }
-        MPI_Bcast(error, 1, MPI_FLOAT, 0, MPI_COMM_WORLD);
+        MPI_Bcast(&error, 1, MPI_FLOAT, 0, MPI_COMM_WORLD);
+        printf("Rank %d, error %f", rank, error);
     } // while
 
     free(A); free(Anew); free(Aext); free(Anewext);
@@ -151,6 +171,6 @@ int main(int argc, char** argv)
 
     if (rank == 0){
         double t2 = MPI_Wtime();
-        printf("Finished calculation! Time: %fs", t2-t1);
+        printf("Finished calculation! Time: %fs\n", t2-t1);
     }
 }
