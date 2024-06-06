@@ -1,0 +1,180 @@
+16 processes
+Jacobi relaxation Calculation: 4096 rows x 4096 columns mesh, maximum of 100 iterations
+Process: 0, Iteration: 10, Error: 0.067383
+Process: 1, Iteration: 10, Error: 0.095152
+Process: 2, Iteration: 10, Error: 0.114974
+Process: 3, Iteration: 10, Error: 0.129908
+Process: 15, Iteration: 10, Error: 0.067383
+Process: 14, Iteration: 10, Error: 0.095152
+Process: 5, Iteration: 10, Error: 0.148759
+Process: 6, Iteration: 10, Error: 0.153395
+Process: 7, Iteration: 10, Error: 0.155004
+Process: 8, Iteration: 10, Error: 0.155004
+Process: 9, Iteration: 10, Error: 0.153395
+Process: 10, Iteration: 10, Error: 0.148759
+Process: 11, Iteration: 10, Error: 0.141012
+Process: 4, Iteration: 10, Error: 0.141011
+Process: 13, Iteration: 10, Error: 0.114974
+Process: 12, Iteration: 10, Error: 0.129908
+Process: 0, Iteration: 20, Error: 0.047533
+Process: 4, Iteration: 20, Error: 0.099995
+Process: 1, Iteration: 20, Error: 0.067335
+Process: 2, Iteration: 20, Error: 0.081452
+Process: 11, Iteration: 20, Error: 0.099995
+Process: 3, Iteration: 20, Error: 0.092085
+Process: 5, Iteration: 20, Error: 0.105535
+Process: 6, Iteration: 20, Error: 0.108851
+Process: 7, Iteration: 20, Error: 0.110020
+Process: 8, Iteration: 20, Error: 0.110020
+Process: 9, Iteration: 20, Error: 0.108851
+Process: 10, Iteration: 20, Error: 0.105535
+Process: 15, Iteration: 20, Error: 0.047533
+Process: 14, Iteration: 20, Error: 0.067336
+Process: 13, Iteration: 20, Error: 0.081452
+Process: 12, Iteration: 20, Error: 0.092085
+Process: 0, Iteration: 30, Error: 0.038707
+Process: 15, Iteration: 30, Error: 0.038706
+Process: 10, Iteration: 30, Error: 0.086197
+Process: 4, Iteration: 30, Error: 0.081662
+Process: 1, Iteration: 30, Error: 0.054892
+Process: 2, Iteration: 30, Error: 0.066454
+Process: 11, Iteration: 30, Error: 0.081662
+Process: 3, Iteration: 30, Error: 0.075174
+Process: 5, Iteration: 30, Error: 0.086197
+Process: 6, Iteration: 30, Error: 0.088921
+Process: 7, Iteration: 30, Error: 0.089897
+Process: 8, Iteration: 30, Error: 0.089897
+Process: 9, Iteration: 30, Error: 0.088921
+Process: 14, Iteration: 30, Error: 0.054892
+Process: 13, Iteration: 30, Error: 0.066454
+Process: 12, Iteration: 30, Error: 0.075174
+Process: 0, Iteration: 40, Error: 0.033198
+Process: 1, Iteration: 40, Error: 0.047167
+Process: 2, Iteration: 40, Error: 0.057136
+Process: 15, Iteration: 40, Error: 0.033198
+Process: 14, Iteration: 40, Error: 0.047166
+Process: 9, Iteration: 40, Error: 0.076518
+Process: 10, Iteration: 40, Error: 0.074162
+Process: 4, Iteration: 40, Error: 0.070244
+Process: 11, Iteration: 40, Error: 0.070244
+Process: 3, Iteration: 40, Error: 0.064646
+Process: 5, Iteration: 40, Error: 0.074162
+Process: 6, Iteration: 40, Error: 0.076517
+Process: 7, Iteration: 40, Error: 0.077369
+Process: 8, Iteration: 40, Error: 0.077369
+Process: 13, Iteration: 40, Error: 0.057136
+Process: 12, Iteration: 40, Error: 0.064646
+Process: 0, Iteration: 50, Error: 0.029779
+Process: 1, Iteration: 50, Error: 0.042370
+Process: 4, Iteration: 50, Error: 0.063173
+Process: 11, Iteration: 50, Error: 0.063174
+Process: 3, Iteration: 50, Error: 0.058131
+Process: 5, Iteration: 50, Error: 0.066711
+Process: 6, Iteration: 50, Error: 0.068841
+Process: 7, Iteration: 50, Error: 0.069618
+Process: 8, Iteration: 50, Error: 0.069618
+Process: 15, Iteration: 50, Error: 0.029779
+Process: 2, Iteration: 50, Error: 0.051358
+Process: 9, Iteration: 50, Error: 0.068841
+Process: 10, Iteration: 50, Error: 0.066711
+Process: 14, Iteration: 50, Error: 0.042370
+Process: 13, Iteration: 50, Error: 0.051358
+Process: 12, Iteration: 50, Error: 0.058131
+Process: 0, Iteration: 60, Error: 0.026997
+Process: 1, Iteration: 60, Error: 0.038467
+Process: 15, Iteration: 60, Error: 0.026997
+Process: 14, Iteration: 60, Error: 0.038467
+Process: 2, Iteration: 60, Error: 0.046643
+Process: 3, Iteration: 60, Error: 0.052805
+Process: 13, Iteration: 60, Error: 0.046643
+Process: 12, Iteration: 60, Error: 0.052805
+Process: 8, Iteration: 60, Error: 0.063279
+Process: 7, Iteration: 60, Error: 0.063279
+Process: 10, Iteration: 60, Error: 0.060622
+Process: 4, Iteration: 60, Error: 0.057400
+Process: 11, Iteration: 60, Error: 0.057401
+Process: 5, Iteration: 60, Error: 0.060622
+Process: 6, Iteration: 60, Error: 0.062565
+Process: 9, Iteration: 60, Error: 0.062565
+Process: 0, Iteration: 70, Error: 0.025027
+Process: 1, Iteration: 70, Error: 0.035711
+Process: 2, Iteration: 70, Error: 0.043315
+Process: 15, Iteration: 70, Error: 0.025027
+Process: 6, Iteration: 70, Error: 0.058147
+Process: 8, Iteration: 70, Error: 0.058818
+Process: 7, Iteration: 70, Error: 0.058818
+Process: 9, Iteration: 70, Error: 0.058147
+Process: 10, Iteration: 70, Error: 0.056333
+Process: 4, Iteration: 70, Error: 0.053333
+Process: 11, Iteration: 70, Error: 0.053333
+Process: 5, Iteration: 70, Error: 0.056334
+Process: 3, Iteration: 70, Error: 0.049057
+Process: 14, Iteration: 70, Error: 0.035711
+Process: 13, Iteration: 70, Error: 0.043316
+Process: 12, Iteration: 70, Error: 0.049057
+Process: 0, Iteration: 80, Error: 0.023327
+Process: 1, Iteration: 80, Error: 0.033313
+Process: 4, Iteration: 80, Error: 0.049798
+Process: 11, Iteration: 80, Error: 0.049799
+Process: 3, Iteration: 80, Error: 0.045794
+Process: 5, Iteration: 80, Error: 0.052606
+Process: 2, Iteration: 80, Error: 0.040432
+Process: 6, Iteration: 80, Error: 0.054306
+Process: 8, Iteration: 80, Error: 0.054939
+Process: 7, Iteration: 80, Error: 0.054939
+Process: 9, Iteration: 80, Error: 0.054306
+Process: 10, Iteration: 80, Error: 0.052606
+Process: 15, Iteration: 80, Error: 0.023327
+Process: 14, Iteration: 80, Error: 0.033313
+Process: 13, Iteration: 80, Error: 0.040432
+Process: 12, Iteration: 80, Error: 0.045794
+Process: 0, Iteration: 90, Error: 0.021958
+Process: 1, Iteration: 90, Error: 0.031391
+Process: 5, Iteration: 90, Error: 0.049612
+Process: 2, Iteration: 90, Error: 0.038113
+Process: 6, Iteration: 90, Error: 0.051222
+Process: 8, Iteration: 90, Error: 0.051824
+Process: 7, Iteration: 90, Error: 0.051824
+Process: 9, Iteration: 90, Error: 0.051222
+Process: 10, Iteration: 90, Error: 0.049613
+Process: 4, Iteration: 90, Error: 0.046960
+Process: 3, Iteration: 90, Error: 0.043178
+Process: 11, Iteration: 90, Error: 0.046960
+Process: 15, Iteration: 90, Error: 0.021957
+Process: 14, Iteration: 90, Error: 0.031391
+Process: 13, Iteration: 90, Error: 0.038114
+Process: 12, Iteration: 90, Error: 0.043178
+Process: 0, Iteration: 100, Error: 0.020806
+Calculation done!
+Process: 1, Iteration: 100, Error: 0.029775
+Calculation done!
+Process: 2, Iteration: 100, Error: 0.036158
+Calculation done!
+Process: 4, Iteration: 100, Error: 0.044567
+Calculation done!
+Process: 3, Iteration: 100, Error: 0.040976
+Calculation done!
+Process: 5, Iteration: 100, Error: 0.047093
+Calculation done!
+Process: 15, Iteration: 100, Error: 0.020806
+Calculation done!
+Process: 6, Iteration: 100, Error: 0.048624
+Calculation done!
+Process: 14, Iteration: 100, Error: 0.029775
+Calculation done!
+Process: 13, Iteration: 100, Error: 0.036159
+Calculation done!
+Process: 7, Iteration: 100, Error: 0.049200
+Calculation done!
+Process: 8, Iteration: 100, Error: 0.049200
+Calculation done!
+Process: 9, Iteration: 100, Error: 0.048623
+Calculation done!
+Process: 11, Iteration: 100, Error: 0.044567
+Calculation done!
+Process: 10, Iteration: 100, Error: 0.047093
+Calculation done!
+Process: 12, Iteration: 100, Error: 0.040976
+Calculation done!
+
+EXECUTION TIME: 5.239799s

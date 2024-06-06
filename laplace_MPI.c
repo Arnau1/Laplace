@@ -9,6 +9,7 @@ float stencil ( float v1, float v2, float v3, float v4 )
     return (v1 + v2 + v3 + v4) / 4;
 }
 
+// Adapted for parallelization
 void laplace_step (float *in, float *out, int n, int m, float *previous, float *posterior, int rank, int size)
 {
     int i, j, k, l;
@@ -25,18 +26,19 @@ void laplace_step (float *in, float *out, int n, int m, float *previous, float *
     if (rank != (size-1))
     {
       for(l=1; l < m-1; l++)
-            out[l] = stencil(in[l+1], in[l-1], in[(n-2)*m+l], posterior[l]);
+            out[(n-1)*m+l] = stencil(in[(n-1)*m+l+1], in[(n-1)*m+l-1], in[(n-2)*m+l], posterior[l]);
     }
 
 }
 
+// Adapted for parallelization
 float laplace_error ( float *old, float *new, int n, int m )
 {
     int i, j;
     float error=0.0f;
     for ( i=1; i < n-1; i++ )
         for ( j=1; j < m-1; j++ )
-            error = fmaxf( error, sqrtf( fabsf( old[i*m+j] - new[i*m+j] )));
+        error = fmaxf( error, sqrtf( fabsf( old[i*m+j] - new[i*m+j] )));
     return error;
 }
 
@@ -66,7 +68,7 @@ int main(int argc, char** argv)
     double t1 = MPI_Wtime();
     
     // INITIALIZE VARIABLES
-    int n = 12, m = 12; //4096
+    int n = 4096, m = 4096;
     const float pi  = 2.0f * asinf(1.0f);
     const float tol = 3.0e-3f;
 
@@ -86,9 +88,8 @@ int main(int argc, char** argv)
     posterior = (float*) malloc(m*sizeof(float));
 
     // INITIALIZE MPI (size = nproc)
-    int size, rank, task;		
-    MPI_Status s;    
-    MPI_Request request;
+    int size, rank;		
+    MPI_Status s;   
     MPI_Init(&argc, &argv);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);	
@@ -106,8 +107,8 @@ int main(int argc, char** argv)
     while ( error > tol && iter < iter_max ) {
         // Send previous and posterior
         if (rank > 0) {MPI_Send(&A[0], m, MPI_FLOAT, rank-1, 0, MPI_COMM_WORLD);}
-        if (rank != (size-1)){MPI_Send(&A[(n-1)*m], m, MPI_FLOAT, rank+1, 1, MPI_COMM_WORLD);}
-        if (rank != (size-1)){MPI_Recv(posterior, m, MPI_FLOAT, rank+1, 0, MPI_COMM_WORLD, &s);}
+        if (rank < (size-1)) {MPI_Send(&A[(n-1)*m], m, MPI_FLOAT, rank+1, 1, MPI_COMM_WORLD);}
+        if (rank < (size-1)) {MPI_Recv(posterior, m, MPI_FLOAT, rank+1, 0, MPI_COMM_WORLD, &s);}
         if (rank > 0) {MPI_Recv(previous, m, MPI_FLOAT, rank-1, 1, MPI_COMM_WORLD, &s);}
         
         // Compute new values using main matrix and writing into auxiliary matrix
@@ -127,10 +128,14 @@ int main(int argc, char** argv)
     } 
 
     printf("Calculation done!\n");   
-    free(A);
-    free(Anew);     
 
-    if (rank == 0){        
+    //MPI_Gather (A, n*m/size, MPI_FLOAT, A, n*m/size, MPI_FLOAT, 0, MPI_COMM_WORLD);
+
+    free(A);
+    free(Anew);  
+
+    MPI_Barrier(MPI_COMM_WORLD);
+    if (rank == 0){           
         double t2 = MPI_Wtime();        
         printf("\nEXECUTION TIME: %fs\n", t2-t1);
     }    
