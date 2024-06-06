@@ -48,7 +48,7 @@ void laplace_init ( float *in, int n, int m )
 
 int main(int argc, char** argv)
 {
-    int n = 4096, m = 4096;
+    int n = 256, m = 256;
     const float pi  = 2.0f * asinf(1.0f);
     const float tol = 3.0e-3f;
 
