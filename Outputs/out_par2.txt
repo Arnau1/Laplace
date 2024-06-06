@@ -1,0 +1,13 @@
+Jacobi relaxation Calculation: 4096 rows x 4096 columns mesh, maximum of 100 iterations
+   10, 0.167001
+   20, 0.111689
+   30, 0.090264
+   40, 0.077496
+   50, 0.069659
+   60, 0.063297
+   70, 0.058827
+   80, 0.054944
+   90, 0.051828
+  100, 0.049203
+Finished calculation! Time: 53.788782smpirun: Forwarding signal 18 to job
+slurmstepd: error: *** JOB 241398 ON clus01 CANCELLED AT 2024-06-06T02:13:11 ***

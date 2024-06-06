@@ -80,8 +80,8 @@ int main(int argc, char** argv)
 
     // Declare arrays
     A    = (float*) malloc(n * m * sizeof(float) );
-    Anew = (float*) malloc(n * split * sizeof(float) );
-    Aext = (float*) malloc(n * (split+2) * sizof(float));
+    Anew = (float*) malloc(n * m * sizeof(float) );
+    Aext = (float*) malloc(n * (split+2) * sizeof(float));
     Anewext = (float*) malloc(n * (split+2) * sizeof(float));
     row0 = (float*) malloc(m * sizeof(float));
     rown = (float*) malloc(m * sizeof(float));
@@ -105,12 +105,12 @@ int main(int argc, char** argv)
         memcpy(row0, A, m*sizeof(float));
         memcpy(rown, A+(m*(split-1)), m*sizeof(float));
         if (rank > 0) {
-            MPI_Send(row0, m, MPI_FLOAT, rank-1, 0, MPI_COMMM_WORLD);
-            MPI_Irecv(post, m, MPI_FLOAT, rank+1, 0, MPI_COMM_WORLD, &request);
+            MPI_Send(row0, m, MPI_FLOAT, rank-1, 0, MPI_COMM_WORLD);
+        if (rank+1 < nproc) {MPI_Irecv(post, m, MPI_FLOAT, rank+1, 0, MPI_COMM_WORLD, &request);}            
             }
         if (rank < (nproc-1)) {
             MPI_Send(rown, m, MPI_FLOAT, rank+1, 0, MPI_COMM_WORLD);
-            MPI_Irecv(prev, m, MPI_FLOAT, rank-1, 0, MPI_COMM_WORLD, &request);
+        if (rank-1 > 0) {MPI_Irecv(prev, m, MPI_FLOAT, rank-1, 0, MPI_COMM_WORLD, &request);} 
         }
 
         // Extend A with prev and post
@@ -124,24 +124,26 @@ int main(int argc, char** argv)
         // Compute new values using main matrix and writing into auxiliary matrix (with Aext and Anewext)
         laplace_step (Aext, Anewext, split+2, m);
 
-        // Compute error = maximum of the square root of the absolute differences (with Aext and Anewext)
-        error = 0.0f;
-        error = laplace_error (Aext, Anewext, split+2, m);
-
         // Create Anew by removing the extensions from Anewext
         memcpy(Anew, Anewext+m, split*m*sizeof(float));
 
-        // Copy from auxiliary matrix to main matrix
-        // laplace_copy (Anew, A, n, m);
-        memcpy(A, Anew, split*m*sizeof(float));
-
-        // Gather A from 0
-        MPI_Gather(A, split*m, MPI_FLOAT, A, split*m, MPI_FLOAT, 0, MPI_COMM_WORLD);
+        // Gather Anew to 0
+        MPI_Gather(Anew, split*m, MPI_FLOAT, Anew, split*m, MPI_FLOAT, 0, MPI_COMM_WORLD);
         
-        // if number of iterations is multiple of 10 then print error on the screen
-        iter++;
-        if (iter % (iter_max/10) == 0)
-        printf("%5d, %0.6f\n", iter, error);
+        if (rank == 0){
+            // Compute error = maximum of the square root of the absolute differences (with Aext and Anewext)
+            error = 0.0f;
+            error = laplace_error (A, Anew, n, m);
+
+            // Copy from auxiliary matrix to main matrix
+            laplace_copy (Anew, A, n, m);
+            
+            // if number of iterations is multiple of 10 then print error on the screen
+            iter++;
+            if (iter % (iter_max/10) == 0)
+            printf("%5d, %0.6f\n", iter, error);
+        }
+
     } // while
 
     free(A); free(Anew); free(Aext); free(Anewext);
@@ -149,6 +151,6 @@ int main(int argc, char** argv)
 
     if (rank == 0){
         double t2 = MPI_Wtime();
-        print("Finished calculation! Time: %fs", t2-t1)
+        printf("Finished calculation! Time: %fs", t2-t1);
     }
 }
