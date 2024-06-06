@@ -104,6 +104,17 @@ int main(int argc, char** argv)
         // Scatter A
         MPI_Scatter(A, split*m, MPI_FLOAT, A, split*m, MPI_FLOAT, 0, MPI_COMM_WORLD);
 
+        
+        if (rank == 2) {
+            printf("Printing A at rank 2");
+            for (int i=0; i<n; i++){
+                for (int j=0; j<m; i++)
+                    printf(" %d ", A[i*n + j]);
+                printf("\n");
+            }
+        }
+
+
         // Send and recieve prev and post
         memcpy(row0, A, m*sizeof(float));
         memcpy(rown, A+(m*(split-1)), m*sizeof(float));
