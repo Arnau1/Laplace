@@ -48,13 +48,13 @@ void laplace_init ( float *in, int n, int m )
 
 int main(int argc, char** argv)
 {
-    int n = 256, m = 256;
+    int n = 4096, m = 4096;
     const float pi  = 2.0f * asinf(1.0f);
     const float tol = 3.0e-3f;
 
     float error= 1.0f;;
 
-    int i, j, iter_max=100, iter=0;
+    int i, j, iter_max=1000, iter=0;
     float *A, *Anew;
 
     // get runtime arguments: n, m and iter_max
