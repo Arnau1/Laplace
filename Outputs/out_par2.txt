@@ -1,13 +1,21 @@
+laplace_MPI2.c: En la función ‘main’:
+laplace_MPI2.c:146:19: error: tipo incompatible para el argumento 1 de ‘MPI_Bcast’
+         MPI_Bcast(error, 1, MPI_FLOAT, 0, MPI_COMM_WORLD);
+                   ^~~~~
+In file included from laplace_MPI2.c:5:
+/usr/include/openmpi-x86_64/mpi.h:1345:36: nota: se esperaba ‘void *’ pero el argumento es de tipo ‘float’
+ OMPI_DECLSPEC  int MPI_Bcast(void *buffer, int count, MPI_Datatype datatype,
+                              ~~~~~~^~~~~~
 Jacobi relaxation Calculation: 4096 rows x 4096 columns mesh, maximum of 100 iterations
-   10, 0.167001
-   20, 0.111689
-   30, 0.090264
-   40, 0.077496
-   50, 0.069659
-   60, 0.063297
-   70, 0.058827
-   80, 0.054944
-   90, 0.051828
-  100, 0.049203
-Finished calculation! Time: 53.788782smpirun: Forwarding signal 18 to job
-slurmstepd: error: *** JOB 241398 ON clus01 CANCELLED AT 2024-06-06T02:13:11 ***
+   10, 0.165382
+   20, 0.110030
+   30, 0.089897
+   40, 0.077370
+   50, 0.069619
+   60, 0.063280
+   70, 0.058819
+   80, 0.054940
+   90, 0.051825
+  100, 0.049201
+Finished calculation! Time: 58.214275smpirun: Forwarding signal 18 to job
+slurmstepd: error: *** JOB 241402 ON clus03 CANCELLED AT 2024-06-06T02:27:15 ***

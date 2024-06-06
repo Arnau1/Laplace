@@ -135,7 +135,7 @@ int main(int argc, char** argv)
             error = 0.0f;
             error = laplace_error (A, Anew, n, m);
 
-            // Copy from auxiliary matrix to main matrix
+            // Copy from auxiliary matrix to main matrix 
             laplace_copy (Anew, A, n, m);
             
             // if number of iterations is multiple of 10 then print error on the screen
@@ -143,7 +143,7 @@ int main(int argc, char** argv)
             if (iter % (iter_max/10) == 0)
             printf("%5d, %0.6f\n", iter, error);
         }
-
+        MPI_Bcast(error, 1, MPI_FLOAT, 0, MPI_COMM_WORLD);
     } // while
 
     free(A); free(Anew); free(Aext); free(Anewext);

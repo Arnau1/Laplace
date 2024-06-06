@@ -1,8 +1,8 @@
 #!/bin/bash 
 
 #SBATCH --job-name=mpi 
-#SBATCH -N 1 # number of nodes, every node contains 12 cores and there at most 12 nodes 
-#SBATCH -n 4 # number of cores/processes, must be at most number of nodes * 12 
+#SBATCH -N 2 # number of nodes, every node contains 12 cores and there at most 12 nodes 
+#SBATCH -n 16 # number of cores/processes, must be at most number of nodes * 12 
 #SBATCH --distribution=cyclic
 #SBATCH --partition=nodo.q 
 #SBATCH --output=Outputs/out_par2.txt 
