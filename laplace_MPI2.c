@@ -67,7 +67,7 @@ int main(int argc, char** argv)
     if (argc>2) {  m        = atoi(argv[2]); }
     if (argc>3) {  iter_max = atoi(argv[3]); }
 
-    // INITIALIZE MPI (size = nproc)
+    // INITIALIZE MPI
     int nproc, rank, task;		
     MPI_Status s;    
     MPI_Request request;
@@ -75,21 +75,21 @@ int main(int argc, char** argv)
     MPI_Comm_size(MPI_COMM_WORLD, &nproc);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
-    // Number of rows per process and of n distributed
+    // Number of rows per process and the extension
     int split = n / nproc;
     int extension;
     if (rank == 0 || rank == nproc-1) {extension = 1;}
     else {extension = 2;}
 
     // Declare arrays
-    A    = (float*) malloc(n * m * sizeof(float) );
-    Anew = (float*) malloc(n * m * sizeof(float) );
-    Aext = (float*) malloc(n * (split+extension) * sizeof(float));
-    Anewext = (float*) malloc(n * (split+extension) * sizeof(float));
-    row0 = (float*) malloc(m * sizeof(float));
-    rown = (float*) malloc(m * sizeof(float));
-    prev = (float*) malloc(m * sizeof(float));
-    post = (float*) malloc(m * sizeof(float));
+    A    = (float*) malloc(n * m * sizeof(float) ); // 4096 * 4096
+    Anew = (float*) malloc(n * m * sizeof(float) ); // 4096 * 4096
+    Aext = (float*) malloc((split+extension) * m * sizeof(float)); // 1026 * 4096 (o 1025 * 4096)
+    Anewext = (float*) malloc((split+extension) * m * sizeof(float)); // 1026 * 4096 (o 1025 * 4096)
+    row0 = (float*) malloc(m * sizeof(float)); // 4096
+    rown = (float*) malloc(m * sizeof(float)); // 4096
+    prev = (float*) malloc(m * sizeof(float)); // 4096
+    post = (float*) malloc(m * sizeof(float)); // 4096
     
     // set boundary conditions
     if (rank == 0) {
@@ -121,7 +121,8 @@ int main(int argc, char** argv)
                 MPI_Irecv(prev, m, MPI_FLOAT, rank-1, 0, MPI_COMM_WORLD, &request);
                 } 
         }
-        MPI_Wait(&request, &s);
+        // int test = MPI_Test(&re<quest, 0, &s);
+        // printf("Rank %d, test %>d.\n", rank, test);
 
         // Extend A with prev and post
         if (rank == 0) {
@@ -163,7 +164,6 @@ int main(int argc, char** argv)
             printf("%5d, %0.6f\n", iter, error);
         }
         MPI_Bcast(&error, 1, MPI_FLOAT, 0, MPI_COMM_WORLD);
-        printf("Rank %d, error %f", rank, error);
     } // while
 
     free(A); free(Anew); free(Aext); free(Anewext);
@@ -173,4 +173,7 @@ int main(int argc, char** argv)
         double t2 = MPI_Wtime();
         printf("Finished calculation! Time: %fs\n", t2-t1);
     }
+    
+    MPI_Finalize();
+    return 0;
 }
