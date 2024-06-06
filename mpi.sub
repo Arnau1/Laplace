@@ -2,7 +2,7 @@
 
 #SBATCH --job-name=mpi 
 #SBATCH -N 1 # number of nodes, every node contains 12 cores and there at most 12 nodes 
-#SBATCH -n 4 # number of cores/processes, must be at most number of nodes * 12 
+#SBATCH -n 8 # number of cores/processes, must be at most number of nodes * 12 
 #SBATCH --distribution=cyclic
 #SBATCH --partition=nodo.q 
 #SBATCH --output=Outputs/out3.txt 
@@ -13,6 +13,6 @@ mpicc $1.c -o executable -lmpi -lm
 
 #mpirun --mca btl_tcp_if_include eth0,eth1 --mca btl_openib_allow_ib 0 $1 
 echo $SLURM_NTASKS processes
-mpirun executable 
+mpirun executable
 
 rm executable
