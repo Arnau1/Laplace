@@ -1,12 +1,33 @@
 1 processes
-Jacobi relaxation Calculation: 4096 rows x 4096 columns mesh, maximum of 1000 iterations
+Jacobi relaxation Calculation: 4096 rows x 4096 columns mesh, maximum of 100 iterations
+   10, 0.155006
+   20, 0.110024
+   30, 0.089901
+   40, 0.077374
+   50, 0.069623
+   60, 0.063285
+   70, 0.058825
+   80, 0.054946
+   90, 0.051831
   100, 0.049208
-  200, 0.034790
-  300, 0.028398
-  400, 0.024596
-  500, 0.022000
-  600, 0.020080
-  700, 0.018592
-  800, 0.017392
-  900, 0.016397
- 1000, 0.015554
+
+ Performance counter stats for './executable':
+
+         69.126,30 msec task-clock:u                     #    1,000 CPUs utilized             
+                 0      context-switches:u               #    0,000 /sec                      
+                 0      cpu-migrations:u                 #    0,000 /sec                      
+             1.766      page-faults:u                    #   25,547 /sec                      
+   178.293.253.842      cycles:u                         #    2,579 GHz                         (50,00%)
+       434.548.664      stalled-cycles-frontend:u        #    0,24% frontend cycles idle        (50,00%)
+    76.741.544.745      stalled-cycles-backend:u         #   43,04% backend cycles idle         (50,00%)
+   251.456.830.546      instructions:u                   #    1,41  insn per cycle            
+                                                  #    0,31  stalled cycles per insn     (50,00%)
+    25.142.717.326      branches:u                       #  363,721 M/sec                       (50,00%)
+         4.432.495      branch-misses:u                  #    0,02% of all branches             (50,00%)
+
+      69,130912088 seconds time elapsed
+
+      68,599916000 seconds user
+       0,041416000 seconds sys
+
+

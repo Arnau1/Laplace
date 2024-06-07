@@ -1,45 +1,448 @@
 4 processes
-Jacobi relaxation Calculation: 256 rows x 256 columns mesh, maximum of 1000 iterations
-Jacobi relaxation Calculation: 256 rows x 256 columns mesh, maximum of 1000 iterations
-Jacobi relaxation Calculation: 256 rows x 256 columns mesh, maximum of 1000 iterations
-Jacobi relaxation Calculation: 256 rows x 256 columns mesh, maximum of 1000 iterations
-  100, 0.049114
-  100, 0.049114
-  100, 0.049114
-  100, 0.049114
-  200, 0.034658
-  200, 0.034658
-  200, 0.034658
-  200, 0.034658
-  300, 0.028236
-  300, 0.028236
-  300, 0.028236
-  300, 0.028236
-  400, 0.024410
-  400, 0.024410
-  400, 0.024410
-  400, 0.024410
-  500, 0.021792
-  500, 0.021792
-  500, 0.021792
-  500, 0.021792
-  600, 0.019853
-  600, 0.019853
-  600, 0.019853
-  600, 0.019853
-  700, 0.018346
-  700, 0.018346
-  700, 0.018346
-  700, 0.018346
-  800, 0.017131
-  800, 0.017131
-  800, 0.017131
-  800, 0.017131
-  900, 0.016119
-  900, 0.016119
-  900, 0.016119
-  900, 0.016119
- 1000, 0.015262
- 1000, 0.015262
- 1000, 0.015262
- 1000, 0.015262
+Jacobi relaxation Calculation: 4096 rows x 4096 columns mesh, maximum of 100 iterations
+Error: 0.500000
+Error: 0.420166
+Error: 0.500000
+Error: 0.420166
+Error: 0.296988
+Error: 0.353553
+Error: 0.353553
+Error: 0.296988
+Error: 0.279508
+Error: 0.234699
+Error: 0.279508
+Error: 0.234699
+Error: 0.233853
+Error: 0.196363
+Error: 0.233853
+Error: 0.196363
+Error: 0.216506
+Error: 0.181727
+Error: 0.216506
+Error: 0.181727
+Error: 0.168400
+Error: 0.200706
+Error: 0.200706
+Error: 0.168400
+Error: 0.186847
+Error: 0.156711
+Error: 0.186847
+Error: 0.156711
+Error: 0.174778
+Error: 0.146533
+Error: 0.174779
+Error: 0.146533
+Error: 0.137650
+Error: 0.164246
+Error: 0.164246
+Error: 0.137650
+Error: 0.155004
+Error: 0.129908
+Error: 0.155004
+Error: 0.129908
+Process: 2, Iteration: 10, Error: 0.155004
+Process: 3, Iteration: 10, Error: 0.129908
+Process: 1, Iteration: 10, Error: 0.155004
+Process: 0, Iteration: 10, Error: 0.129908
+Error: 0.123048
+Error: 0.146839
+Error: 0.146839
+Error: 0.123048
+Error: 0.116959
+Error: 0.139580
+Error: 0.139580
+Error: 0.116959
+Error: 0.113214
+Error: 0.135147
+Error: 0.135148
+Error: 0.113214
+Error: 0.109652
+Error: 0.130926
+Error: 0.130926
+Error: 0.109652
+Error: 0.126924
+Error: 0.106305
+Error: 0.126924
+Error: 0.106306
+Error: 0.123142
+Error: 0.103114
+Error: 0.123143
+Error: 0.103114
+Error: 0.100108
+Error: 0.119572
+Error: 0.119572
+Error: 0.100108
+Error: 0.116203
+Error: 0.097288
+Error: 0.116203
+Error: 0.097288
+Error: 0.113023
+Error: 0.094603
+Error: 0.113023
+Error: 0.094603
+Error: 0.110020
+Error: 0.092085
+Error: 0.110020
+Error: 0.092085
+Process: 3, Iteration: 20, Error: 0.092085
+Process: 2, Iteration: 20, Error: 0.110020
+Process: 1, Iteration: 20, Error: 0.110020
+Process: 0, Iteration: 20, Error: 0.092085
+Error: 0.107182
+Error: 0.089703
+Error: 0.107182
+Error: 0.089703
+Error: 0.087434
+Error: 0.104497
+Error: 0.104497
+Error: 0.087434
+Error: 0.101954
+Error: 0.085311
+Error: 0.101954
+Error: 0.085310
+Error: 0.099543
+Error: 0.083285
+Error: 0.099543
+Error: 0.083285
+Error: 0.097811
+Error: 0.081829
+Error: 0.097811
+Error: 0.081829
+Error: 0.096129
+Error: 0.080402
+Error: 0.096129
+Error: 0.080402
+Error: 0.094497
+Error: 0.079044
+Error: 0.094497
+Error: 0.079043
+Error: 0.077707
+Error: 0.092915
+Error: 0.092915
+Error: 0.077707
+Error: 0.091382
+Error: 0.076420
+Error: 0.091382
+Error: 0.076420
+Error: 0.089897
+Error: 0.075174
+Error: 0.089897
+Error: 0.075174
+Process: 2, Iteration: 30, Error: 0.089897
+Process: 3, Iteration: 30, Error: 0.075174
+Process: 1, Iteration: 30, Error: 0.089897
+Process: 0, Iteration: 30, Error: 0.075174
+Error: 0.088458
+Error: 0.073954
+Error: 0.088458
+Error: 0.073954
+Error: 0.072794
+Error: 0.087065
+Error: 0.087065
+Error: 0.072794
+Error: 0.085715
+Error: 0.071655
+Error: 0.085715
+Error: 0.071655
+Error: 0.084408
+Error: 0.070558
+Error: 0.084408
+Error: 0.070558
+Error: 0.083142
+Error: 0.069496
+Error: 0.083142
+Error: 0.069496
+Error: 0.081915
+Error: 0.068456
+Error: 0.081915
+Error: 0.068456
+Error: 0.067467
+Error: 0.080725
+Error: 0.080725
+Error: 0.067467
+Error: 0.066493
+Error: 0.079572
+Error: 0.079573
+Error: 0.066493
+Error: 0.078454
+Error: 0.065557
+Error: 0.078454
+Error: 0.065557
+Error: 0.077369
+Error: 0.064646
+Error: 0.077369
+Error: 0.064646
+Process: 3, Iteration: 40, Error: 0.064646
+Process: 2, Iteration: 40, Error: 0.077369
+Process: 1, Iteration: 40, Error: 0.077369
+Process: 0, Iteration: 40, Error: 0.064646
+Error: 0.063937
+Error: 0.076524
+Error: 0.076524
+Error: 0.063936
+Error: 0.075694
+Error: 0.063231
+Error: 0.075694
+Error: 0.063231
+Error: 0.062555
+Error: 0.074880
+Error: 0.074880
+Error: 0.062555
+Error: 0.074083
+Error: 0.061880
+Error: 0.074082
+Error: 0.061879
+Error: 0.061225
+Error: 0.073300
+Error: 0.073300
+Error: 0.061225
+Error: 0.072534
+Error: 0.060580
+Error: 0.072534
+Error: 0.060580
+Error: 0.071782
+Error: 0.059946
+Error: 0.071783
+Error: 0.059946
+Error: 0.059332
+Error: 0.071046
+Error: 0.071046
+Error: 0.059332
+Error: 0.058719
+Error: 0.070325
+Error: 0.070325
+Error: 0.058719
+Error: 0.069618
+Error: 0.058131
+Error: 0.069618
+Error: 0.058131
+Process: 2, Iteration: 50, Error: 0.069618
+Process: 3, Iteration: 50, Error: 0.058131
+Process: 1, Iteration: 50, Error: 0.069618
+Process: 0, Iteration: 50, Error: 0.058131
+Error: 0.057546
+Error: 0.068925
+Error: 0.068925
+Error: 0.057546
+Error: 0.068246
+Error: 0.056977
+Error: 0.068246
+Error: 0.056977
+Error: 0.056419
+Error: 0.067581
+Error: 0.067581
+Error: 0.056419
+Error: 0.066929
+Error: 0.055868
+Error: 0.066929
+Error: 0.055868
+Error: 0.055336
+Error: 0.066290
+Error: 0.066290
+Error: 0.055335
+Error: 0.065664
+Error: 0.054804
+Error: 0.065664
+Error: 0.054804
+Error: 0.054293
+Error: 0.065050
+Error: 0.065050
+Error: 0.054293
+Error: 0.064448
+Error: 0.053785
+Error: 0.064448
+Error: 0.053785
+Error: 0.053291
+Error: 0.063858
+Error: 0.063858
+Error: 0.053291
+Error: 0.052805
+Error: 0.063279
+Error: 0.063279
+Error: 0.052805
+Process: 2, Iteration: 60, Error: 0.063279
+Process: 3, Iteration: 60, Error: 0.052805
+Process: 1, Iteration: 60, Error: 0.063279
+Process: 0, Iteration: 60, Error: 0.052805
+Error: 0.062805
+Error: 0.052407
+Error: 0.062805
+Error: 0.052407
+Error: 0.052010
+Error: 0.062337
+Error: 0.062337
+Error: 0.052010
+Error: 0.051627
+Error: 0.061876
+Error: 0.061876
+Error: 0.051627
+Error: 0.061420
+Error: 0.051240
+Error: 0.061420
+Error: 0.051240
+Error: 0.060972
+Error: 0.050866
+Error: 0.060972
+Error: 0.050866
+Error: 0.060529
+Error: 0.050492
+Error: 0.060529
+Error: 0.050492
+Error: 0.060092
+Error: 0.050126
+Error: 0.060092
+Error: 0.050126
+Error: 0.059662
+Error: 0.049765
+Error: 0.059662
+Error: 0.049765
+Error: 0.059237
+Error: 0.049405
+Error: 0.059237
+Error: 0.049405
+Error: 0.058818
+Error: 0.049057
+Error: 0.058818
+Error: 0.049057
+Process: 2, Iteration: 70, Error: 0.058818
+Process: 3, Iteration: 70, Error: 0.049057
+Process: 1, Iteration: 70, Error: 0.058818
+Process: 0, Iteration: 70, Error: 0.049057
+Error: 0.058405
+Error: 0.048705
+Error: 0.058405
+Error: 0.048705
+Error: 0.057999
+Error: 0.048368
+Error: 0.057999
+Error: 0.048368
+Error: 0.048028
+Error: 0.057597
+Error: 0.057597
+Error: 0.048028
+Error: 0.047697
+Error: 0.057201
+Error: 0.057201
+Error: 0.047697
+Error: 0.056811
+Error: 0.047369
+Error: 0.056811
+Error: 0.047369
+Error: 0.056426
+Error: 0.047045
+Error: 0.056426
+Error: 0.047045
+Error: 0.056046
+Error: 0.046728
+Error: 0.056046
+Error: 0.046728
+Error: 0.046410
+Error: 0.055672
+Error: 0.055672
+Error: 0.046410
+Error: 0.046103
+Error: 0.055303
+Error: 0.055303
+Error: 0.046104
+Error: 0.054939
+Error: 0.045794
+Error: 0.054939
+Error: 0.045794
+Process: 1, Iteration: 80, Error: 0.054939
+Process: 2, Iteration: 80, Error: 0.054939
+Process: 3, Iteration: 80, Error: 0.045794
+Process: 0, Iteration: 80, Error: 0.045794
+Error: 0.054580
+Error: 0.054580
+Error: 0.045496
+Error: 0.045496
+Error: 0.054226
+Error: 0.045197
+Error: 0.054226
+Error: 0.045197
+Error: 0.044905
+Error: 0.053876
+Error: 0.053877
+Error: 0.044905
+Error: 0.053532
+Error: 0.044615
+Error: 0.053532
+Error: 0.044615
+Error: 0.044370
+Error: 0.053240
+Error: 0.053240
+Error: 0.044370
+Error: 0.052951
+Error: 0.044126
+Error: 0.052951
+Error: 0.044126
+Error: 0.043887
+Error: 0.052665
+Error: 0.052665
+Error: 0.043887
+Error: 0.043646
+Error: 0.052382
+Error: 0.052382
+Error: 0.043646
+Error: 0.052102
+Error: 0.043414
+Error: 0.052102
+Error: 0.043414
+Error: 0.051824
+Error: 0.043178
+Error: 0.051824
+Error: 0.043178
+Process: 2, Iteration: 90, Error: 0.051824
+Process: 3, Iteration: 90, Error: 0.043178
+Process: 1, Iteration: 90, Error: 0.051824
+Process: 0, Iteration: 90, Error: 0.043178
+Error: 0.051549
+Error: 0.042950
+Error: 0.051550
+Error: 0.042950
+Error: 0.051277
+Error: 0.042720
+Error: 0.051278
+Error: 0.042720
+Error: 0.051008
+Error: 0.042494
+Error: 0.051008
+Error: 0.042494
+Error: 0.050742
+Error: 0.042271
+Error: 0.050742
+Error: 0.042271
+Error: 0.050478
+Error: 0.042048
+Error: 0.050479
+Error: 0.042048
+Error: 0.050218
+Error: 0.041831
+Error: 0.050218
+Error: 0.041831
+Error: 0.041611
+Error: 0.049959
+Error: 0.049959
+Error: 0.041611
+Error: 0.041399
+Error: 0.049704
+Error: 0.049704
+Error: 0.041399
+Error: 0.049451
+Error: 0.041184
+Error: 0.049451
+Error: 0.041184
+Error: 0.049200
+Error: 0.040976
+Error: 0.049200
+Error: 0.040976
+Process: 2, Iteration: 100, Error: 0.049200
+Calculation done!
+Process: 3, Iteration: 100, Error: 0.040976
+Calculation done!
+Process: 1, Iteration: 100, Error: 0.049200
+Calculation done!
+Process: 0, Iteration: 100, Error: 0.040976
+Calculation done!
+
+EXECUTION TIME: 18.376774s

@@ -68,11 +68,11 @@ int main(int argc, char** argv)
     double t1 = MPI_Wtime();
     
     // INITIALIZE VARIABLES
-    int n = 32768, m = 32768;
+    int n = 4096, m = 4096;
     const float pi  = 2.0f * asinf(1.0f);
     const float tol = 3.0e-3f;
 
-    float error= 1.0f;;
+    float error= 1.0f;
 
     int i, j, iter_max=100, iter=0;
     float *A, *Anew, *previous, *posterior;
@@ -117,6 +117,7 @@ int main(int argc, char** argv)
         // Compute error = maximum of the square root of the absolute differences
         error = 0.0f;
         error = laplace_error (A, Anew, n/size, m);
+        printf("Error: %f\n", error);
 
         // Copy from auxiliary matrix to main matrix
         laplace_copy (Anew, A, n/size, m);
