@@ -1,0 +1,38 @@
+8 processes
+
+Jacobi relaxation Calculation: 4 rows x 4 columns mesh, maximum of 1 iterations
+[clus01:4059710:0:4059710] Caught signal 8 (Floating point exception: integer divide by zero)
+==== backtrace (tid:4059710) ====
+ 0  /lib64/libucs.so.0(ucs_handle_error+0x2dc) [0x7fb508e75edc]
+ 1  /lib64/libucs.so.0(+0x2b0bc) [0x7fb508e760bc]
+ 2  /lib64/libucs.so.0(+0x2b36a) [0x7fb508e7636a]
+ 3  executable() [0x40176e]
+ 4  /lib64/libc.so.6(__libc_start_main+0xe5) [0x7fb51cd89d85]
+ 5  executable() [0x400bfe]
+=================================
+[clus01:4059710] *** Process received signal ***
+[clus01:4059710] Signal: Floating point exception (8)
+[clus01:4059710] Signal code:  (-6)
+[clus01:4059710] Failing at address: 0x59c1003df23e
+[clus01:4059710] [ 0] /lib64/libpthread.so.0(+0x12cf0)[0x7fb51d126cf0]
+[clus01:4059710] [ 1] executable[0x40176e]
+[clus01:4059710] [ 2] /lib64/libc.so.6(__libc_start_main+0xe5)[0x7fb51cd89d85]
+[clus01:4059710] [ 3] executable[0x400bfe]
+[clus01:4059710] *** End of error message ***
+[1717719327.416970] [clus01:4059713:0]            sock.c:327  UCX  ERROR connect(fd=34, dest_addr=192.168.12.1:49765) failed: Connection refused
+[1717719327.417000] [clus01:4059713:0]          tcp_ep.c:1156 UCX  ERROR try to increase "net.core.somaxconn", "net.core.netdev_max_backlog", "net.ipv4.tcp_max_syn_backlog" to the maximum value on the remote node or increase UCX_TCP_MAX_CONN_RETRIES (=25)
+[1717719327.417002] [clus01:4059715:0]            sock.c:327  UCX  ERROR connect(fd=33, dest_addr=192.168.11.1:47745) failed: Connection refused
+[1717719327.417031] [clus01:4059715:0]          tcp_ep.c:1156 UCX  ERROR try to increase "net.core.somaxconn", "net.core.netdev_max_backlog", "net.ipv4.tcp_max_syn_backlog" to the maximum value on the remote node or increase UCX_TCP_MAX_CONN_RETRIES (=25)
+[1717719327.417013] [clus01:4059717:0]            sock.c:327  UCX  ERROR connect(fd=33, dest_addr=192.168.11.1:47745) failed: Connection refused
+[1717719327.417040] [clus01:4059717:0]          tcp_ep.c:1156 UCX  ERROR try to increase "net.core.somaxconn", "net.core.netdev_max_backlog", "net.ipv4.tcp_max_syn_backlog" to the maximum value on the remote node or increase UCX_TCP_MAX_CONN_RETRIES (=25)
+[1717719327.416989] [clus01:4059727:0]            sock.c:327  UCX  ERROR connect(fd=33, dest_addr=192.168.12.1:49765) failed: Connection refused
+[1717719327.417040] [clus01:4059727:0]          tcp_ep.c:1156 UCX  ERROR try to increase "net.core.somaxconn", "net.core.netdev_max_backlog", "net.ipv4.tcp_max_syn_backlog" to the maximum value on the remote node or increase UCX_TCP_MAX_CONN_RETRIES (=25)
+[1717719327.417082] [clus01:4059727:0]            sock.c:327  UCX  ERROR connect(fd=34, dest_addr=192.168.11.1:47745) failed: Connection refused
+[1717719327.417093] [clus01:4059727:0]          tcp_ep.c:1156 UCX  ERROR try to increase "net.core.somaxconn", "net.core.netdev_max_backlog", "net.ipv4.tcp_max_syn_backlog" to the maximum value on the remote node or increase UCX_TCP_MAX_CONN_RETRIES (=25)
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 4059710 on node clus01 exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------

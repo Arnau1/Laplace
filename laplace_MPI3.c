@@ -53,13 +53,13 @@ int main(int argc, char** argv)
     double t1 = MPI_Wtime();
 
     // Init variables
-    int n = 4096, m = 4096;
+    int n = 4, m = 4;
     const float pi  = 2.0f * asinf(1.0f);
     const float tol = 3.0e-3f;
 
     float error= 1.0f;
 
-    int i, j, iter_max=100, iter=0;
+    int i, j, iter_max=1, iter=0;
     float *A, *Anew, *Aext, *Anewext, *row0, *rown, *prev, *post; 
 
     // get runtime arguments: n, m and iter_max
@@ -103,17 +103,22 @@ int main(int argc, char** argv)
     while ( error > tol && iter < iter_max ) {
         // Scatter A
         MPI_Scatter(A, split*m, MPI_FLOAT, A, split*m, MPI_FLOAT, 0, MPI_COMM_WORLD);
-
         
-        if (rank == 2) {
-            printf("Printing A at rank 2");
-            for (int i=0; i<n; i++){
-                for (int j=0; j<m; i++)
-                    printf(" %d ", A[i*n + j]);
-                printf("\n");
-            }
-        }
+        // if (rank == 2) {
+        //     printf("Printing A at rank 2");
+        //     for (int i=0; i<n; i++){
+        //         for (int j=0; j<m; i++){
+        //             printf(" %d ", A[i*n + j]);
+        //         }
+        //         printf("\n");
+        //     }
+        // }
 
+        // if (rank == 2){
+        //     for (int i=0; i<m*n; i++){
+        //         printf("%f\n");
+        //     }
+        // }
 
         // Send and recieve prev and post
         memcpy(row0, A, m*sizeof(float));
