@@ -1,44 +1,45 @@
 4 processes
-Jacobi relaxation Calculation: 4096 rows x 4096 columns mesh, maximum of 100 iterations
-                                  0.599883
-                                  0.599883
-                                  0.599883
-Process: 0, Iteration: 10, Error: 0.599883
-                                  0.606002
-                                  0.606002
-                                  0.606002
-Process: 0, Iteration: 20, Error: 0.606002
-                                  0.608097
-                                  0.608097
-                                  0.608097
-Process: 0, Iteration: 30, Error: 0.608097
-                                  0.609155
-                                  0.609155
-                                  0.609155
-Process: 0, Iteration: 40, Error: 0.609155
-                                  0.609794
-                                  0.609794
-                                  0.609794
-Process: 0, Iteration: 50, Error: 0.609794
-                                  0.610221
-                                  0.610221
-                                  0.610221
-Process: 0, Iteration: 60, Error: 0.610221
-                                  0.610526
-                                  0.610526
-                                  0.610526
-Process: 0, Iteration: 70, Error: 0.610526
-                                  0.610756
-                                  0.610756
-                                  0.610756
-Process: 0, Iteration: 80, Error: 0.610756
-                                  0.610935
-Process: 0, Iteration: 90, Error: 0.610935
-                                  0.610935
-                                  0.610935
-Process: 0, Iteration: 100, Error: 0.611078
-                                  0.611078
-                                  0.611078
-                                  0.611078
-
-EXECUTION TIME: 17.876379s
+Jacobi relaxation Calculation: 256 rows x 256 columns mesh, maximum of 1000 iterations
+Jacobi relaxation Calculation: 256 rows x 256 columns mesh, maximum of 1000 iterations
+Jacobi relaxation Calculation: 256 rows x 256 columns mesh, maximum of 1000 iterations
+Jacobi relaxation Calculation: 256 rows x 256 columns mesh, maximum of 1000 iterations
+  100, 0.049114
+  100, 0.049114
+  100, 0.049114
+  100, 0.049114
+  200, 0.034658
+  200, 0.034658
+  200, 0.034658
+  200, 0.034658
+  300, 0.028236
+  300, 0.028236
+  300, 0.028236
+  300, 0.028236
+  400, 0.024410
+  400, 0.024410
+  400, 0.024410
+  400, 0.024410
+  500, 0.021792
+  500, 0.021792
+  500, 0.021792
+  500, 0.021792
+  600, 0.019853
+  600, 0.019853
+  600, 0.019853
+  600, 0.019853
+  700, 0.018346
+  700, 0.018346
+  700, 0.018346
+  700, 0.018346
+  800, 0.017131
+  800, 0.017131
+  800, 0.017131
+  800, 0.017131
+  900, 0.016119
+  900, 0.016119
+  900, 0.016119
+  900, 0.016119
+ 1000, 0.015262
+ 1000, 0.015262
+ 1000, 0.015262
+ 1000, 0.015262
