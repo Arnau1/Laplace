@@ -3,90 +3,90 @@ Jacobi relaxation Calculation: 4096 rows x 4096 columns mesh, maximum of 100 ite
 Process: 7, Iteration: 10, Error: 0.095152
 Process: 6, Iteration: 10, Error: 0.129908
 Process: 5, Iteration: 10, Error: 0.148759
+Process: 4, Iteration: 10, Error: 0.155004
+Process: 0, Iteration: 10, Error: 0.095152
+Process: 1, Iteration: 10, Error: 0.129908
 Process: 2, Iteration: 10, Error: 0.148759
 Process: 3, Iteration: 10, Error: 0.155004
-Process: 4, Iteration: 10, Error: 0.155004
-Process: 1, Iteration: 10, Error: 0.129908
-Process: 0, Iteration: 10, Error: 0.095152
 Process: 7, Iteration: 20, Error: 0.067336
 Process: 6, Iteration: 20, Error: 0.092085
 Process: 5, Iteration: 20, Error: 0.105535
-Process: 4, Iteration: 20, Error: 0.110020
 Process: 2, Iteration: 20, Error: 0.105535
 Process: 3, Iteration: 20, Error: 0.110020
-Process: 1, Iteration: 20, Error: 0.092085
+Process: 4, Iteration: 20, Error: 0.110020
 Process: 0, Iteration: 20, Error: 0.067335
+Process: 1, Iteration: 20, Error: 0.092085
 Process: 7, Iteration: 30, Error: 0.054892
 Process: 6, Iteration: 30, Error: 0.075174
-Process: 3, Iteration: 30, Error: 0.089897
-Process: 5, Iteration: 30, Error: 0.086197
-Process: 4, Iteration: 30, Error: 0.089897
-Process: 2, Iteration: 30, Error: 0.086197
-Process: 0, Iteration: 30, Error: 0.054892
 Process: 1, Iteration: 30, Error: 0.075174
+Process: 2, Iteration: 30, Error: 0.086197
+Process: 3, Iteration: 30, Error: 0.089897
+Process: 4, Iteration: 30, Error: 0.089897
+Process: 0, Iteration: 30, Error: 0.054892
+Process: 5, Iteration: 30, Error: 0.086197
 Process: 7, Iteration: 40, Error: 0.047166
 Process: 6, Iteration: 40, Error: 0.064646
 Process: 3, Iteration: 40, Error: 0.077369
-Process: 5, Iteration: 40, Error: 0.074162
 Process: 4, Iteration: 40, Error: 0.077369
+Process: 5, Iteration: 40, Error: 0.074162
 Process: 2, Iteration: 40, Error: 0.074162
-Process: 0, Iteration: 40, Error: 0.047167
 Process: 1, Iteration: 40, Error: 0.064646
+Process: 0, Iteration: 40, Error: 0.047167
 Process: 7, Iteration: 50, Error: 0.042370
 Process: 6, Iteration: 50, Error: 0.058131
-Process: 5, Iteration: 50, Error: 0.066711
 Process: 3, Iteration: 50, Error: 0.069618
+Process: 1, Iteration: 50, Error: 0.058131
 Process: 4, Iteration: 50, Error: 0.069618
 Process: 0, Iteration: 50, Error: 0.042370
 Process: 2, Iteration: 50, Error: 0.066711
-Process: 1, Iteration: 50, Error: 0.058131
+Process: 5, Iteration: 50, Error: 0.066711
 Process: 7, Iteration: 60, Error: 0.038467
 Process: 6, Iteration: 60, Error: 0.052805
 Process: 4, Iteration: 60, Error: 0.063279
 Process: 5, Iteration: 60, Error: 0.060622
 Process: 3, Iteration: 60, Error: 0.063279
-Process: 2, Iteration: 60, Error: 0.060622
-Process: 0, Iteration: 60, Error: 0.038467
 Process: 1, Iteration: 60, Error: 0.052805
+Process: 0, Iteration: 60, Error: 0.038467
+Process: 2, Iteration: 60, Error: 0.060622
 Process: 7, Iteration: 70, Error: 0.035711
 Process: 6, Iteration: 70, Error: 0.049057
 Process: 5, Iteration: 70, Error: 0.056333
 Process: 4, Iteration: 70, Error: 0.058818
+Process: 1, Iteration: 70, Error: 0.049057
 Process: 3, Iteration: 70, Error: 0.058818
 Process: 2, Iteration: 70, Error: 0.056334
-Process: 1, Iteration: 70, Error: 0.049057
 Process: 0, Iteration: 70, Error: 0.035711
 Process: 7, Iteration: 80, Error: 0.033313
 Process: 6, Iteration: 80, Error: 0.045794
 Process: 5, Iteration: 80, Error: 0.052606
-Process: 3, Iteration: 80, Error: 0.054939
 Process: 4, Iteration: 80, Error: 0.054939
+Process: 3, Iteration: 80, Error: 0.054939
 Process: 2, Iteration: 80, Error: 0.052606
-Process: 0, Iteration: 80, Error: 0.033313
 Process: 1, Iteration: 80, Error: 0.045794
+Process: 0, Iteration: 80, Error: 0.033313
 Process: 7, Iteration: 90, Error: 0.031391
 Process: 6, Iteration: 90, Error: 0.043178
+Process: 3, Iteration: 90, Error: 0.051824
 Process: 5, Iteration: 90, Error: 0.049613
 Process: 4, Iteration: 90, Error: 0.051824
-Process: 1, Iteration: 90, Error: 0.043178
-Process: 3, Iteration: 90, Error: 0.051824
 Process: 0, Iteration: 90, Error: 0.031391
 Process: 2, Iteration: 90, Error: 0.049612
+Process: 1, Iteration: 90, Error: 0.043178
 Process: 7, Iteration: 100, Error: 0.029775
 Calculation done!
 Process: 6, Iteration: 100, Error: 0.040976
-Calculation done!
-Process: 3, Iteration: 100, Error: 0.049200
-Calculation done!
-Process: 2, Iteration: 100, Error: 0.047093
 Calculation done!
 Process: 5, Iteration: 100, Error: 0.047093
 Calculation done!
 Process: 4, Iteration: 100, Error: 0.049200
 Calculation done!
-Process: 0, Iteration: 100, Error: 0.029775
+Process: 3, Iteration: 100, Error: 0.049200
 Calculation done!
 Process: 1, Iteration: 100, Error: 0.040976
 Calculation done!
+Process: 0, Iteration: 100, Error: 0.029775
+Calculation done!
+Process: 2, Iteration: 100, Error: 0.047093
+Calculation done!
 
-EXECUTION TIME: 9.446208s
+EXECUTION TIME: 9.424916s
