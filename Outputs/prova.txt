@@ -1,0 +1,90 @@
+8 processes
+Jacobi relaxation Calculation: 32768 rows x 32768 columns mesh, maximum of 100 iterations
+Process: 7, Iteration: 10, Error: 0.095779
+Process: 6, Iteration: 10, Error: 0.130283
+Process: 5, Iteration: 10, Error: 0.148961
+Process: 4, Iteration: 10, Error: 0.155006
+Process: 3, Iteration: 10, Error: 0.155006
+Process: 0, Iteration: 10, Error: 0.095779
+Process: 2, Iteration: 10, Error: 0.148961
+Process: 1, Iteration: 10, Error: 0.130283
+Process: 7, Iteration: 20, Error: 0.067958
+Process: 6, Iteration: 20, Error: 0.092459
+Process: 5, Iteration: 20, Error: 0.105723
+Process: 4, Iteration: 20, Error: 0.110024
+Process: 3, Iteration: 20, Error: 0.110024
+Process: 0, Iteration: 20, Error: 0.067958
+Process: 2, Iteration: 20, Error: 0.105723
+Process: 1, Iteration: 20, Error: 0.092459
+Process: 7, Iteration: 30, Error: 0.055510
+Process: 6, Iteration: 30, Error: 0.075538
+Process: 5, Iteration: 30, Error: 0.086382
+Process: 4, Iteration: 30, Error: 0.089901
+Process: 3, Iteration: 30, Error: 0.089901
+Process: 0, Iteration: 30, Error: 0.055510
+Process: 2, Iteration: 30, Error: 0.086382
+Process: 1, Iteration: 30, Error: 0.075538
+Process: 7, Iteration: 40, Error: 0.047765
+Process: 6, Iteration: 40, Error: 0.065005
+Process: 5, Iteration: 40, Error: 0.074342
+Process: 0, Iteration: 40, Error: 0.047765
+Process: 3, Iteration: 40, Error: 0.077374
+Process: 4, Iteration: 40, Error: 0.077374
+Process: 2, Iteration: 40, Error: 0.074342
+Process: 1, Iteration: 40, Error: 0.065005
+Process: 7, Iteration: 50, Error: 0.042970
+Process: 6, Iteration: 50, Error: 0.058486
+Process: 5, Iteration: 50, Error: 0.066892
+Process: 0, Iteration: 50, Error: 0.042970
+Process: 4, Iteration: 50, Error: 0.069624
+Process: 3, Iteration: 50, Error: 0.069624
+Process: 2, Iteration: 50, Error: 0.066892
+Process: 1, Iteration: 50, Error: 0.058486
+Process: 7, Iteration: 60, Error: 0.039050
+Process: 6, Iteration: 60, Error: 0.053158
+Process: 0, Iteration: 60, Error: 0.039050
+Process: 5, Iteration: 60, Error: 0.060800
+Process: 2, Iteration: 60, Error: 0.060800
+Process: 3, Iteration: 60, Error: 0.063285
+Process: 4, Iteration: 60, Error: 0.063285
+Process: 1, Iteration: 60, Error: 0.053158
+Process: 7, Iteration: 70, Error: 0.036291
+Process: 6, Iteration: 70, Error: 0.049407
+Process: 0, Iteration: 70, Error: 0.036291
+Process: 5, Iteration: 70, Error: 0.056513
+Process: 3, Iteration: 70, Error: 0.058825
+Process: 2, Iteration: 70, Error: 0.056513
+Process: 4, Iteration: 70, Error: 0.058825
+Process: 1, Iteration: 70, Error: 0.049407
+Process: 7, Iteration: 80, Error: 0.033892
+Process: 6, Iteration: 80, Error: 0.046145
+Process: 0, Iteration: 80, Error: 0.033892
+Process: 5, Iteration: 80, Error: 0.052784
+Process: 3, Iteration: 80, Error: 0.054946
+Process: 2, Iteration: 80, Error: 0.052784
+Process: 4, Iteration: 80, Error: 0.054946
+Process: 1, Iteration: 80, Error: 0.046145
+Process: 7, Iteration: 90, Error: 0.031966
+Process: 6, Iteration: 90, Error: 0.043527
+Process: 5, Iteration: 90, Error: 0.049791
+Process: 4, Iteration: 90, Error: 0.051831
+Process: 3, Iteration: 90, Error: 0.051831
+Process: 2, Iteration: 90, Error: 0.049791
+Process: 1, Iteration: 90, Error: 0.043527
+Process: 0, Iteration: 90, Error: 0.031966
+Process: 7, Iteration: 100, Error: 0.030343
+Calculation done!
+Process: 6, Iteration: 100, Error: 0.041321
+Calculation done!
+Process: 5, Iteration: 100, Error: 0.047269
+Calculation done!
+Process: 4, Iteration: 100, Error: 0.049208
+Calculation done!
+Process: 3, Iteration: 100, Error: 0.049208
+Calculation done!
+Process: 2, Iteration: 100, Error: 0.047269
+Calculation done!
+Process: 1, Iteration: 100, Error: 0.041321
+Calculation done!
+mpirun: Forwarding signal 18 to job
+slurmstepd: error: *** JOB 242092 ON clus04 CANCELLED AT 2024-06-07T16:14:42 ***
