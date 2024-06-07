@@ -32,13 +32,11 @@ void laplace_step (float *in, float *out, int n, int m, float *previous, float *
 }
 
 // Adapted for parallelization
-float laplace_error ( float *old, float *new, int n, int m, int size, int rank )
+float laplace_error ( float *old, float *new, int n, int m )
 {
-    int i, j, skip0=0, skipn=0;
+    int i, j;
     float error=0.0f;
-    if (rank == 0) {skip0 = 1;}
-    else if (rank == size-1) {skipn = 1;}
-    for ( i=skip0; i < n-skipn; i++ )
+    for ( i=1; i < n-1; i++ )
         for ( j=1; j < m-1; j++ )
         error = fmaxf( error, sqrtf( fabsf( old[i*m+j] - new[i*m+j] )));
     return error;
@@ -70,12 +68,11 @@ int main(int argc, char** argv)
     double t1 = MPI_Wtime();
     
     // INITIALIZE VARIABLES
-    int n = 4096, m = 4096;
+    int n = 32768, m = 32768;
     const float pi  = 2.0f * asinf(1.0f);
     const float tol = 3.0e-3f;
 
-    float error= 1.0f;
-    float max_error = 0.0f;
+    float error= 1.0f;;
 
     int i, j, iter_max=100, iter=0;
     float *A, *Anew, *previous, *posterior;
@@ -119,29 +116,20 @@ int main(int argc, char** argv)
 
         // Compute error = maximum of the square root of the absolute differences
         error = 0.0f;
-        error = laplace_error (A, Anew, n/size, m, size, rank);
+        error = laplace_error (A, Anew, n/size, m);
 
         // Copy from auxiliary matrix to main matrix
         laplace_copy (Anew, A, n/size, m);
 
-        // Collect error
-        MPI_Reduce(&error, &max_error, 1, MPI_FLOAT, MPI_MAX, 0, MPI_COMM_WORLD);
-        MPI_Bcast(&max_error, 1, MPI_FLOAT, 0, MPI_COMM_WORLD);
-
-        error = max_error;
-
+        // if number of iterations is multiple of 10 then print error on the screen
         iter++;
-        if (rank == 0){
-            // if number of iterations is multiple of 10 then print error on the screen
-            if (iter % (iter_max/10) == 0)
-                printf("Process: %d, Iteration: %d, Error: %0.6f\n", rank, iter, error);
-        }
-        else {
-            // if number of iterations is multiple of 10 then print error on the screen
-            if (iter % (iter_max/10) == 0)
-                printf("                                  %0.6f\n",error);
-        }
-    }
+        if (iter % (iter_max/10) == 0)
+            printf("Process: %d, Iteration: %d, Error: %0.6f\n", rank, iter, error);
+    } 
+
+    printf("Calculation done!\n");   
+
+    //MPI_Gather (A, n*m/size, MPI_FLOAT, A, n*m/size, MPI_FLOAT, 0, MPI_COMM_WORLD);
 
     free(A);
     free(Anew);  

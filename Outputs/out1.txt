@@ -1,0 +1,44 @@
+4 processes
+Jacobi relaxation Calculation: 4096 rows x 4096 columns mesh, maximum of 100 iterations
+                                  0.599883
+                                  0.599883
+                                  0.599883
+Process: 0, Iteration: 10, Error: 0.599883
+                                  0.606002
+                                  0.606002
+                                  0.606002
+Process: 0, Iteration: 20, Error: 0.606002
+                                  0.608097
+                                  0.608097
+                                  0.608097
+Process: 0, Iteration: 30, Error: 0.608097
+                                  0.609155
+                                  0.609155
+                                  0.609155
+Process: 0, Iteration: 40, Error: 0.609155
+                                  0.609794
+                                  0.609794
+                                  0.609794
+Process: 0, Iteration: 50, Error: 0.609794
+                                  0.610221
+                                  0.610221
+                                  0.610221
+Process: 0, Iteration: 60, Error: 0.610221
+                                  0.610526
+                                  0.610526
+                                  0.610526
+Process: 0, Iteration: 70, Error: 0.610526
+                                  0.610756
+                                  0.610756
+                                  0.610756
+Process: 0, Iteration: 80, Error: 0.610756
+                                  0.610935
+Process: 0, Iteration: 90, Error: 0.610935
+                                  0.610935
+                                  0.610935
+Process: 0, Iteration: 100, Error: 0.611078
+                                  0.611078
+                                  0.611078
+                                  0.611078
+
+EXECUTION TIME: 17.876379s

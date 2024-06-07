@@ -53,14 +53,15 @@ int main(int argc, char** argv)
     double t1 = MPI_Wtime();
 
     // Init variables
-    int n = 4096, m = 4096;
+    int n = 8, m = 8;
     const float pi  = 2.0f * asinf(1.0f);
     const float tol = 3.0e-3f;
 
     float error= 1.0f;
+    float max_error;
 
-    int i, j, iter_max=100, iter=0;
-    float *A, *Anew, *Aext, *Anewext, *row0, *rown, *prev, *post; 
+    int i, j, iter_max=1, iter=0;
+    float *A, *Anew, *Aext, *Anewext, *prev, *post; 
 
     // get runtime arguments: n, m and iter_max
     if (argc>1) {  n        = atoi(argv[1]); }
@@ -86,8 +87,6 @@ int main(int argc, char** argv)
     Anew = (float*) malloc(n * m * sizeof(float) ); // 4096 * 4096
     Aext = (float*) malloc((split+extension) * m * sizeof(float)); // 1026 * 4096 (o 1025 * 4096)
     Anewext = (float*) malloc((split+extension) * m * sizeof(float)); // 1026 * 4096 (o 1025 * 4096)
-    row0 = (float*) malloc(m * sizeof(float)); // 4096
-    rown = (float*) malloc(m * sizeof(float)); // 4096
     prev = (float*) malloc(m * sizeof(float)); // 4096
     post = (float*) malloc(m * sizeof(float)); // 4096
     
@@ -99,30 +98,26 @@ int main(int argc, char** argv)
             n, m, iter_max );
     }
 
-        // Main loop: iterate until error <= tol a maximum of iter_max iterations
+    // Scatter A
+    MPI_Scatter(A, split*m, MPI_FLOAT, A, split*m, MPI_FLOAT, 0, MPI_COMM_WORLD);
+
+    // Main loop: iterate until error <= tol a maximum of iter_max iterations
     while ( error > tol && iter < iter_max ) {
-        // Scatter A
-        MPI_Scatter(A, split*m, MPI_FLOAT, A, split*m, MPI_FLOAT, 0, MPI_COMM_WORLD);
+        if (rank == 2) {
+            printf("Printing A at rank 2\n");
+            for (int i=0; i<split; i++){
+                for (int j=0; j<m; j++){
+                    printf(" %f ", A[i*m + j]);
+                }
+                printf("\n");
+            }
+        }
 
         // Send and recieve prev and post
-        memcpy(row0, A, m*sizeof(float));
-        memcpy(rown, A+(m*(split-1)), m*sizeof(float));
-        // if not 0
-        if (rank > 0) {
-            MPI_Send(row0, m, MPI_FLOAT, rank-1, 0, MPI_COMM_WORLD);
-            if (rank+1 < nproc) {
-                MPI_Irecv(post, m, MPI_FLOAT, rank+1, 0, MPI_COMM_WORLD, &request);
-                }            
-        }
-        // if not last
-        if (rank < (nproc-1)) {
-            MPI_Send(rown, m, MPI_FLOAT, rank+1, 0, MPI_COMM_WORLD);
-            if (rank-1 > 0) {
-                MPI_Irecv(prev, m, MPI_FLOAT, rank-1, 0, MPI_COMM_WORLD, &request);
-                } 
-        }
-        // int test = MPI_Test(&re<quest, 0, &s);
-        // printf("Rank %d, test %>d.\n", rank, test);
+        if (rank > 0) {MPI_Send(&A[0], m, MPI_FLOAT, rank-1, 0, MPI_COMM_WORLD);}
+        if (rank < (nproc-1)) {MPI_Send(&A[(n-1)*m], m, MPI_FLOAT, rank+1, 1, MPI_COMM_WORLD);}
+        if (rank < (nproc-1)) {MPI_Recv(post, m, MPI_FLOAT, rank+1, 0, MPI_COMM_WORLD, &s);}
+        if (rank > 0) {MPI_Recv(prev, m, MPI_FLOAT, rank-1, 1, MPI_COMM_WORLD, &s);}
 
         // Extend A with prev and post
         if (rank == 0) {
@@ -137,37 +132,62 @@ int main(int argc, char** argv)
             memcpy(Aext+(split*m), post, m*sizeof(float));
         }
 
-        // Create Anewext as a copy of Aext
-        memcpy(Anewext, Aext, (split+extension)*m*sizeof(float));
+        if (rank == 2) {
+            printf("Printing Aext at rank 2\n");
+            for (int i=0; i<split+extension; i++){
+                for (int j=0; j<m; j++){
+                    printf(" %f ", Aext[i*m + j]);
+                }
+                printf("\n");
+            }
+        }
 
         // Compute new values using main matrix and writing into auxiliary matrix (with Aext and Anewext)
         laplace_step (Aext, Anewext, split+extension, m);
+        
+        // Compute error = maximum of the square root of the absolute differences (with Aext and Anewext)
+        error = 0.0f;
+        error = laplace_error (Aext, Anewext, n, m);
 
         // Create Anew by removing the extensions from Anewext
         if (rank == 0) {memcpy(Anew, Anewext, split*m*sizeof(float));}
         else           {memcpy(Anew, Anewext+m, split*m*sizeof(float));}
 
-        // Gather Anew to 0
-        MPI_Gather(Anew, split*m, MPI_FLOAT, Anew, split*m, MPI_FLOAT, 0, MPI_COMM_WORLD);
-        
-        if (rank == 0){
-            // Compute error = maximum of the square root of the absolute differences (with Aext and Anewext)
-            error = 0.0f;
-            error = laplace_error (A, Anew, n, m);
+        // Copy from auxiliary matrix to main matrix 
+        laplace_copy (Anew, A, n, m);
 
-            // Copy from auxiliary matrix to main matrix 
-            laplace_copy (Anew, A, n, m);
-            
-            // if number of iterations is multiple of 10 then print error on the screen
-            iter++;
-            if (iter % (iter_max/10) == 0)
-            printf("%5d, %0.6f\n", iter, error);
+        if (rank == 2) {
+            printf("Printing A at rank 2 later\n");
+            for (int i=0; i<split; i++){
+                for (int j=0; j<m; j++){
+                    printf(" %f ", A[i*m + j]);
+                }
+                printf("\n");
+            }
         }
-        MPI_Bcast(&error, 1, MPI_FLOAT, 0, MPI_COMM_WORLD);
+
+        // Collect error
+        MPI_Reduce(&error, &max_error, 1, MPI_FLOAT, MPI_MAX, 0, MPI_COMM_WORLD);
+        MPI_Bcast(&max_error, 1, MPI_FLOAT, 0, MPI_COMM_WORLD);
+        error = max_error;
+        
+        iter++;
+        if (rank == 0){
+            // if number of iterations is multiple of 10 then print error on the screen
+            if (iter % (iter_max/10) == 0)
+                printf("Process: %d, Iteration: %d, Error: %0.6f\n", rank, iter, error);
+        }
+        else {
+            // if number of iterations is multiple of 10 then print error on the screen
+            if (iter % (iter_max/10) == 0)
+                printf("                                  %0.6f\n",error);
+        }
     } // while
 
-    free(A); free(Anew); free(Aext); free(Anewext);
-    free(row0); free(rown); free(prev); free(post);
+
+    free(A); free(Anew); free(Aext); free(Anewext); free(prev); free(post);
+
+    MPI_Barrier(MPI_COMM_WORLD);
 
     if (rank == 0){
         double t2 = MPI_Wtime();

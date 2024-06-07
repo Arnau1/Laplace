@@ -1,0 +1,48 @@
+4 processes
+Jacobi relaxation Calculation: 4096 rows x 4096 columns mesh, maximum of 100 iterations
+Process: 0, Iteration: 10, Error: 0.129908
+Process: 1, Iteration: 10, Error: 0.155004
+Process: 2, Iteration: 10, Error: 0.155004
+Process: 3, Iteration: 10, Error: 0.129908
+Process: 0, Iteration: 20, Error: 0.092085
+Process: 1, Iteration: 20, Error: 0.110020
+Process: 2, Iteration: 20, Error: 0.110020
+Process: 3, Iteration: 20, Error: 0.092085
+Process: 0, Iteration: 30, Error: 0.075174
+Process: 1, Iteration: 30, Error: 0.089897
+Process: 2, Iteration: 30, Error: 0.089897
+Process: 3, Iteration: 30, Error: 0.075174
+Process: 0, Iteration: 40, Error: 0.064646
+Process: 1, Iteration: 40, Error: 0.077369
+Process: 2, Iteration: 40, Error: 0.077369
+Process: 3, Iteration: 40, Error: 0.064646
+Process: 0, Iteration: 50, Error: 0.058131
+Process: 2, Iteration: 50, Error: 0.069618
+Process: 1, Iteration: 50, Error: 0.069618
+Process: 3, Iteration: 50, Error: 0.058131
+Process: 1, Iteration: 60, Error: 0.063279
+Process: 0, Iteration: 60, Error: 0.052805
+Process: 2, Iteration: 60, Error: 0.063279
+Process: 3, Iteration: 60, Error: 0.052805
+Process: 0, Iteration: 70, Error: 0.049057
+Process: 1, Iteration: 70, Error: 0.058818
+Process: 2, Iteration: 70, Error: 0.058818
+Process: 3, Iteration: 70, Error: 0.049057
+Process: 2, Iteration: 80, Error: 0.054939
+Process: 0, Iteration: 80, Error: 0.045794
+Process: 1, Iteration: 80, Error: 0.054939
+Process: 3, Iteration: 80, Error: 0.045794
+Process: 1, Iteration: 90, Error: 0.051824
+Process: 2, Iteration: 90, Error: 0.051824
+Process: 0, Iteration: 90, Error: 0.043178
+Process: 3, Iteration: 90, Error: 0.043178
+Process: 2, Iteration: 100, Error: 0.049200
+Calculation done!
+Process: 0, Iteration: 100, Error: 0.040976
+Calculation done!
+Process: 1, Iteration: 100, Error: 0.049200
+Calculation done!
+Process: 3, Iteration: 100, Error: 0.040976
+Calculation done!
+
+EXECUTION TIME: 18.125269s
