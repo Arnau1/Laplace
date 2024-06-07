@@ -1,0 +1,14 @@
+1 processes
+Jacobi relaxation Calculation: 4096 rows x 4096 columns mesh, maximum of 1000 iterations
+Process: 0, Iteration: 100, Error: 0.049208
+Process: 0, Iteration: 200, Error: 0.034790
+Process: 0, Iteration: 300, Error: 0.028398
+Process: 0, Iteration: 400, Error: 0.024596
+Process: 0, Iteration: 500, Error: 0.021999
+Process: 0, Iteration: 600, Error: 0.020080
+Process: 0, Iteration: 700, Error: 0.018592
+Process: 0, Iteration: 800, Error: 0.017392
+Process: 0, Iteration: 900, Error: 0.016397
+Process: 0, Iteration: 1000, Error: 0.015554
+
+EXECUTION TIME: 17.589241s

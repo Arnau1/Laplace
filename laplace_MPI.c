@@ -32,21 +32,6 @@ void laplace_step (float *in, float *out, int n, int m, float *previous, float *
 }
 
 // Adapted for parallelization
-// float laplace_error ( float *old, float *new, int n, int m, int size, int rank )
-// {
-//     int i, j, skip0=0, skipn=0;
-//     float error=0.0f;
-//     if (rank == 0) {skip0 = 1;}
-//     else if (rank == size-1) {skipn = 1;}
-//     // don't skip the top and bottom edges for the central parts of the matrix
-//     for ( i=skip0; i < n-skipn; i++ ){
-//         for ( j=1; j < m-1; j++ ){
-//             error = fmaxf( error, sqrtf( fabsf( old[i*m+j] - new[i*m+j] )));
-//         }
-//     }
-//     return error;
-// }
-
 float laplace_error ( float *old, float *new, int n, int m )
 {
     int i, j;
@@ -64,6 +49,7 @@ void laplace_copy ( float *in, float *out, int n, int m )
         for ( j=1; j < m-1; j++ )
             out[i*m+j]= in[i*m+j];
 }
+
 
 void laplace_init ( float *in, int n, int m )
 {
@@ -87,7 +73,6 @@ int main(int argc, char** argv)
     const float tol = 3.0e-3f;
 
     float error= 1.0f;
-    float max_error = 0.0f;
 
     int i, j, iter_max=1000, iter=0;
     float *A, *Anew, *previous, *posterior;
@@ -131,18 +116,13 @@ int main(int argc, char** argv)
 
         // Compute error = maximum of the square root of the absolute differences
         error = 0.0f;
-        // error = laplace_error (A, Anew, n/size, m, size, rank);
         error = laplace_error (A, Anew, n/size, m);
+        // printf("Error: %f\n", error);
 
         // Copy from auxiliary matrix to main matrix
         laplace_copy (Anew, A, n/size, m);
 
-        // Collect error
-        MPI_Reduce(&error, &max_error, 1, MPI_FLOAT, MPI_MAX, 0, MPI_COMM_WORLD);
-        MPI_Bcast(&max_error, 1, MPI_FLOAT, 0, MPI_COMM_WORLD);
-
-        error = max_error;
-
+        // if number of iterations is multiple of 10 then print error on the screen
         iter++;
         if (rank == 0){
             // if number of iterations is multiple of 10 then print error on the screen
@@ -154,7 +134,11 @@ int main(int argc, char** argv)
             if (iter % (iter_max/10) == 0)
                 printf("                                   %0.6f\n",error);
         }
-    }
+    } 
+
+    // printf("Calculation done!\n");   
+
+    //MPI_Gather (A, n*m/size, MPI_FLOAT, A, n*m/size, MPI_FLOAT, 0, MPI_COMM_WORLD);
 
     free(A);
     free(Anew);  
@@ -163,7 +147,7 @@ int main(int argc, char** argv)
     if (rank == 0){           
         double t2 = MPI_Wtime();        
         printf("\nEXECUTION TIME: %fs\n", t2-t1);
-    }
+    }    
     MPI_Finalize();
     return 0;
 }
