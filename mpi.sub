@@ -1,11 +1,11 @@
 #!/bin/bash 
 
 #SBATCH --job-name=mpi 
-#SBATCH -N 3 # number of nodes, every node contains 12 cores and there at most 12 nodes 
-#SBATCH -n 32 # number of cores/processes, must be at most number of nodes * 12 
+#SBATCH -N 1 # number of nodes, every node contains 12 cores and there at most 12 nodes 
+#SBATCH -n 4 # number of cores/processes, must be at most number of nodes * 12 
 #SBATCH --distribution=cyclic
 #SBATCH --partition=nodo.q 
-#SBATCH --output=Outputs/par16.txt 
+#SBATCH --output=Outputs/out7.txt 
 
 module load openmpi/4.1.1 
 

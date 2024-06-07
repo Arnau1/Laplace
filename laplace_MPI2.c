@@ -107,7 +107,7 @@ int main(int argc, char** argv)
         // Send and recieve prev and post
         memcpy(row0, A, m*sizeof(float));
         memcpy(rown, A+(m*(split-1)), m*sizeof(float));
-        // If not 0
+        // if not 0
         if (rank > 0) {
             MPI_Send(row0, m, MPI_FLOAT, rank-1, 0, MPI_COMM_WORLD);
             if (rank+1 < nproc) {
